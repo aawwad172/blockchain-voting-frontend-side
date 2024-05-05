@@ -34,8 +34,8 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/aawwad172/Blockchain_E_Voting_System.git
-   cd Blockchain_E_Voting_System
+   git clone https://github.com/aawwad172/Graduation-Project-E-Voting-System.git
+   cd Graduation-Project-E-Voting-System
    ```
 
 2. **Install Dependencies:**
