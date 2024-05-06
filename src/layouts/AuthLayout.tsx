@@ -1,7 +1,7 @@
 // components/PageLayout.tsx
 import React from "react";
-import Navbar from "../components/";
-import Footer from "./Footer";
+import Navbar from "../components/User/Navbar";
+import Footer from "../components/User/Footer";
 
 type Props = {
 	children: React.ReactNode;
@@ -10,6 +10,7 @@ type Props = {
 const PageLayout: React.FC<Props> = ({ children }) => {
 	return (
 		<>
+
 			<Navbar />
 			{children}
 			<Footer />

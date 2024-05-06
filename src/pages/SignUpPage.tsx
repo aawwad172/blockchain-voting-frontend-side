@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "../components/User/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/soft-ui-dashboard.css";
 import backgroundImage from "../assets/img/curved-images/curved14.jpg";
