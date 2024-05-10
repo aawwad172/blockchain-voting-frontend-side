@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Testing from "../test/Testing";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
+import Testing from "@test/Testing";
+import SignInPage from "@pages/SignInPage";
+import SignUpPage from "@pages/SignUpPage";
 
 // This is the main component of the app. It will render the testing component and the sign in page.
 

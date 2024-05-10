@@ -1,7 +1,7 @@
 // components/PageLayout.tsx
 import React from "react";
-import Navbar from "../components/User/Navbar";
-import Footer from "../components/User/Footer";
+import Navbar from "@components/User/Navbar";
+import Footer from "@components/User/Footer";
 
 type Props = {
 	children: React.ReactNode;

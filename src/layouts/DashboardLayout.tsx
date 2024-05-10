@@ -1,6 +1,6 @@
 import React from "react";
-import DashboardSidebar from "../components/Dashboard/Sidebar/DashboardSidebar";
-import DashboardNavbar from "../components/Dashboard/DashboardNavbar";
+import DashboardSidebar from "@components/Dashboard/Sidebar/DashboardSidebar";
+import DashboardNavbar from "@components/Dashboard/DashboardNavbar";
 
 type Props = {
     children: React.ReactNode;
@@ -15,12 +15,11 @@ const DashboardLayout = ({ children }: Props) => {
                     className="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
                 >
                     <DashboardNavbar />
-                    {children}
+                    <div className="container-fluid py-4">
+                        {children}
+                    </div>
                 </main>
             </div>
-
-
-
         </>
 
     );
