@@ -11,7 +11,7 @@ import Dashboard from "@pages/Dashboard";
 import DasbhaordLayout from "@layouts/DashboardLayout";
 import Card from "@components/Dashboard/Card";
 import ElectionDetails from "@pages/ElectionDetails";
-
+import LeadingScreen from "@components/User/LoadingScreen";
 function Testing(): React.ReactElement {
 	return (
 		<>
@@ -22,7 +22,7 @@ function Testing(): React.ReactElement {
 			{/* <DashboardSidebar /> */}
 			<Dashboard />
 			{/* <ElectionDetails /> */}
-
+			{/* <LeadingScreen /> */}
 		</>
 	);
 }

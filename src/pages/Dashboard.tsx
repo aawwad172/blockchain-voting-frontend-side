@@ -1,8 +1,9 @@
-import React from 'react';
-import Card from '@components/Dashboard/Card'
+import React, { useEffect, useState } from 'react';
+import Card from '@components/Dashboard/Card';
 import DashboardLayout from '@layouts/DashboardLayout';
+import LoadingScreen from '@components/User/LoadingScreen';
+import Divider from '@components/User/Divider';
 
-// Define an interface for the individual card data
 interface CardData {
     id: number;
     title: string;
@@ -10,42 +11,81 @@ interface CardData {
     daysForElection: string;
 }
 
-// Define an array of card data using the CardData interface
-const data: CardData[] = [
-    { id: 1, title: "Student Council", date: "2021-2022    ", daysForElection: "10 days left" },
-    { id: 2, title: "Student Council", date: "2021-10-10", daysForElection: "10 days left" },
-    { id: 3, title: "Student Council", date: "2021-10-10", daysForElection: "10 days left" },
-    { id: 4, title: "Student Council", date: "2021-10-10", daysForElection: "10 days left" },
+const fetchElectionsFromDB = async (): Promise<CardData[]> => {
+    try {
+        const response = await fetch("https://api.example.com/elections");
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error: unknown) {
+        console.error("Error fetching elections:", (error as Error).message);
+        throw error; // Re-throw the error to be handled in useEffect
+    }
+};
 
-];
-
-// Helper function to chunk the data into groups, annotated with types
 function chunk(arr: CardData[], size: number): CardData[][] {
     const chunkedArr: CardData[][] = [];
-    for (let i = 0; i < arr.length; i += size) {
+    let i = 0;
+    while (i < arr.length) {
         chunkedArr.push(arr.slice(i, i + size));
+        i += size;
     }
     return chunkedArr;
 }
 
 const Dashboard: React.FC = () => {
-    const rows = chunk(data, 4); // Chunk data into groups of 4
+    const [isLoading, setIsLoading] = useState(true);
+    const [elections, setElections] = useState<CardData[][]>([]);
+    const [error, setError] = useState<Error | null>(null);
 
-    // TODO: Fetch data from an API and update the data array
-    //! Change the selection criteria for the elections because this is the dashboard and not all elections should be shown
-    //TODO: Add a loading state while fetching data
-    // TODO: Add error handling for failed API requests
-    // TODO: 
+    useEffect(() => {
+        setIsLoading(true);
+        setError(null);
+        fetchElectionsFromDB()
+            .then((data) => {
+                // Process data into chunks for layout
+                const chunkedData = chunk(data, 4); // You can adjust the chunk size as needed
+                setElections(chunkedData);
+                setIsLoading(false);
+            })
+            .catch((error: unknown) => {
+                if (error instanceof Error) {
+                    setError(error);
+                } else {
+                    setError(new Error('Failed to fetch elections'));
+                }
+                setIsLoading(false);
+            });
+    }, []);
+
+    if (isLoading) {
+        return (
+            <DashboardLayout>
+                <LoadingScreen />
+            </DashboardLayout>
+        );
+    }
+
+    if (error) {
+        return (
+            <DashboardLayout>
+                <div>Error: {error.message}</div>
+            </DashboardLayout>
+        );
+    }
+
     return (
         <DashboardLayout>
             <div className="container-fluid">
-                {rows.map((row, index) => (
+                {elections.map((row, index) => (
                     <div key={index} className="row">
                         {row.map((item, idx) => (
                             <Card key={idx} id={item.id} title={item.title} date={item.date} daysForElection={item.daysForElection} />
                         ))}
                     </div>
                 ))}
+                <Divider />
             </div>
         </DashboardLayout>
     );
