@@ -31,6 +31,11 @@ function chunk(arr: CardData[], size: number): CardData[][] {
 const Dashboard: React.FC = () => {
     const rows = chunk(data, 4); // Chunk data into groups of 4
 
+    // TODO: Fetch data from an API and update the data array
+    //! Change the selection criteria for the elections because this is the dashboard and not all elections should be shown
+    //TODO: Add a loading state while fetching data
+    // TODO: Add error handling for failed API requests
+    // TODO: 
     return (
         <DashboardLayout>
             <div className="container-fluid">

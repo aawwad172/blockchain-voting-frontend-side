@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 const ElectionDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
 
+    // ! The elections page doesn' render in the when clicking on it
     return (
         <div>
             <h1>Election Details</h1>

@@ -10,6 +10,7 @@ import DashboardLayout from "@layouts/DashboardLayout";
 import Dashboard from "@pages/Dashboard";
 import DasbhaordLayout from "@layouts/DashboardLayout";
 import Card from "@components/Dashboard/Card";
+import ElectionDetails from "@pages/ElectionDetails";
 
 function Testing(): React.ReactElement {
 	return (
@@ -20,6 +21,7 @@ function Testing(): React.ReactElement {
 			{/* <DashboardFooter /> */}
 			{/* <DashboardSidebar /> */}
 			<Dashboard />
+			{/* <ElectionDetails /> */}
 
 		</>
 	);
