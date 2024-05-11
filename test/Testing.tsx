@@ -7,19 +7,21 @@ import SignUpPage from "@pages/SignUpPage";
 import Navbar from "@components/User/Navbar";
 import DashboardNavbar from "@components/Dashboard/DashboardNavbar";
 import DashboardLayout from "@layouts/DashboardLayout";
+import Dashboard from "@pages/Dashboard";
+import DasbhaordLayout from "@layouts/DashboardLayout";
+import Card from "@components/Dashboard/Card";
 
 function Testing(): React.ReactElement {
 	return (
-		<React.StrictMode>
+		<>
 			{/* <DashboardNavbar /> */}
 			{/* <SignInPage /> */}
 			{/* <SignUpPage /> */}
 			{/* <DashboardFooter /> */}
 			{/* <DashboardSidebar /> */}
-			<DashboardLayout>
-				<h1>Hello</h1>
-			</DashboardLayout>
-		</React.StrictMode>
+			<Dashboard />
+
+		</>
 	);
 }
 
