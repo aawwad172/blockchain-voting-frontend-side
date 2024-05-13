@@ -57,7 +57,7 @@ const Card: React.FC<CardProps> = ({ id, title, date, daysForElection }) => {
                     <div className="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto text-right">
                         <div className="d-flex justify-content-between">
                             <p className="text-sm mb-0 text-capitalize font-weight-bold">{daysForElection}</p>
-                            <Link to={`/election-${id}`}>
+                            <Link to={`/election/${id}`}>
                                 <div>
                                     More Details
                                     <i className="fas fa-arrow-right text-sm ms-1 text-right" aria-hidden="true"></i>

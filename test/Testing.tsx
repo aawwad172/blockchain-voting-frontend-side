@@ -12,7 +12,8 @@ import DasbhaordLayout from "@layouts/DashboardLayout";
 import Card from "@components/Dashboard/Card";
 import ElectionDetails from "@pages/ElectionDetails";
 import LeadingScreen from "@components/User/LoadingScreen";
-function Testing(): React.ReactElement {
+import ElectionsPage from "@pages/ElectionsPage";
+const Testing: React.FC = () => {
 	return (
 		<>
 			{/* <DashboardNavbar /> */}
@@ -23,6 +24,7 @@ function Testing(): React.ReactElement {
 			<Dashboard />
 			{/* <ElectionDetails /> */}
 			{/* <LeadingScreen /> */}
+			{/* <ElectionsPage /> */}
 		</>
 	);
 }

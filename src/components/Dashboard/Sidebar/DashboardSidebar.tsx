@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@assets/css/soft-ui-dashboard.css";
-
+import { Link } from "react-router-dom";
 // Link of the our website logo 
 import logo from "@assets/img/logos/logo.jpg";
 
@@ -17,17 +17,16 @@ const DashboardSidebar: React.FC = () => {
 						aria-hidden="true"
 						id="iconSidenav"
 					/>
-					<a
+					<Link to="/dashboard"
 						className="navbar-brand m-0"
-						href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
-						target="_blank">
+					>
 						<img
 							src={logo}
 							className="navbar-brand-img h-100"
 							alt="main_logo"
 						/>
 						<span className="ms-1 font-weight-bold">Dashboard</span>
-					</a>
+					</Link>
 				</div>
 				<hr className="horizontal dark mt-0" />
 				<div
@@ -35,9 +34,9 @@ const DashboardSidebar: React.FC = () => {
 					id="sidenav-collapse-main">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<a
+							<Link to={"/dashboard"}
 								className="nav-link active"
-								href="../pages/dashboard.html">
+							>
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 									<svg
 										width="12px"
@@ -73,12 +72,12 @@ const DashboardSidebar: React.FC = () => {
 									</svg>
 								</div>
 								<span className="nav-link-text ms-1">Dashboard</span>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a
+							<Link to="/elections"
 								className="nav-link"
-								href="../pages/tables.html">
+							>
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 									<svg
 										width="12px"
@@ -116,7 +115,7 @@ const DashboardSidebar: React.FC = () => {
 									</svg>
 								</div>
 								<span className="nav-link-text ms-1">Elections</span>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item mt-3">
 							<h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
