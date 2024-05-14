@@ -22,22 +22,31 @@ function chunk(arr: Elections[], size: number): Elections[][] {
     return chunkedArr;
 }
 
+// Hardcoded data for testing
+const hardcodedData: Elections[][] = chunk([
+    { id: 1, title: "Election 1", date: "2022 - 2023", daysForElection: "5" },
+    { id: 2, title: "Election 2", date: "2021 - 2022", daysForElection: "30" },
+    { id: 3, title: "Election 3", date: "2020 - 2021", daysForElection: "55" },
+    { id: 4, title: "Election 4", date: "2018 - 2019", daysForElection: "80" },
+], 2);
+
 const Dashboard: React.FC = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [elections, setElections] = useState<Elections[][]>([]);
+    const [isLoading, setIsLoading] = useState(false); // Initially set to false since we are using hardcoded data
+    const [elections, setElections] = useState<Elections[][]>(hardcodedData);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        setIsLoading(true);
-        fetchElections()
-            .then(data => {
-                setElections(data);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setError(err);
-                setIsLoading(false);
-            });
+        // Uncomment below for real API fetching
+        // setIsLoading(true);
+        // fetchElections()
+        //     .then(data => {
+        //         setElections(data);
+        //         setIsLoading(false);
+        //     })
+        //     .catch(err => {
+        //         setError(err);
+        //         setIsLoading(false);
+        //     });
     }, []);
 
     if (isLoading) {
@@ -56,10 +65,6 @@ const Dashboard: React.FC = () => {
         );
     }
 
-
-    // TODO: Fetch data from an API and update the data array using blockchain data
-    //! Change the selection criteria for the elections because this is the dashboard and not all elections should be shown
-    // TODO: Use the chunk function to split the data into rows of 2
     return (
         <DashboardLayout>
             <div className="container-fluid">

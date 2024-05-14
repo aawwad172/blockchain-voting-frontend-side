@@ -8,6 +8,8 @@ interface CardProps {
     daysForElection: string;
 }
 
+// fixme: Implement the `daysForElection` logic when to write '${} Days Left to end' and when to write '${} Days left to start'
+
 const Card: React.FC<CardProps> = ({ id, title, date, daysForElection }) => {
     return (
         <div className="col-xl-6 col-sm-6 mb-xl-4 mb-8">

@@ -1,6 +1,19 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const DashboardNavbar: React.FC = () => {
+  const location = useLocation();
+
+  // Function to convert pathname to a readable page name
+  const formatPageName = (pathname: string) => {
+    // Remove leading slash and replace dashes or underscores with spaces
+    const formatted = pathname.replace(/\/|_/g, ' ').trim();
+    // Capitalize the first letter of each word
+    return formatted.length ? formatted.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ') : 'Home';
+  };
+
+  const pageName = formatPageName(location.pathname);
+
   return (
     <nav className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div className="container-fluid py-1 px-3">
@@ -10,22 +23,10 @@ const DashboardNavbar: React.FC = () => {
               Pages
             </li>
             <li className="breadcrumb-item text-sm text-dark active" aria-current="page">
-              Dashboard
-            </li>
-            <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a
-                href="javascript:;"
-                className="nav-link text-body p-0"
-                id="iconNavbarSidenav">
-                <div className="sidenav-toggler-inner">
-                  <i className="sidenav-toggler-line"></i>
-                  <i className="sidenav-toggler-line"></i>
-                  <i className="sidenav-toggler-line"></i>
-                </div>
-              </a>
+              {pageName}
             </li>
           </ol>
-          <h6 className="font-weight-bolder mb-0">Dashboard</h6>
+          <h6 className="font-weight-bolder mb-0">{pageName}</h6>
         </nav>
       </div>
     </nav>
