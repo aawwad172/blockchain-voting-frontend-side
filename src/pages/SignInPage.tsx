@@ -1,8 +1,8 @@
 // pages/SignInPage.tsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../components/User/Navbar";
+import Footer from "../components/User/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/soft-ui-dashboard.css";
 import backgroundImage from "../assets/img/curved-images/curved6.jpg";
