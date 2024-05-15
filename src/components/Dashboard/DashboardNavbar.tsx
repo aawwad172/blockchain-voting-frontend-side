@@ -4,15 +4,20 @@ import { useLocation } from 'react-router-dom';
 const DashboardNavbar: React.FC = () => {
   const location = useLocation();
 
-  // Function to convert pathname to a readable page name
+  // Function to convert pathname to a readable page and subpage name
   const formatPageName = (pathname: string) => {
-    // Remove leading slash and replace dashes or underscores with spaces
-    const formatted = pathname.replace(/\/|_/g, ' ').trim();
-    // Capitalize the first letter of each word
-    return formatted.length ? formatted.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ') : 'Home';
+    // Remove leading slash and split pathname into segments
+    const segments = pathname.replace(/^\//, '').split('/');
+    // Convert segments to readable format
+    const formattedSegments = segments.map(segment =>
+      segment.replace(/_/g, ' ').split(' ').map(word =>
+        word[0].toUpperCase() + word.slice(1)
+      ).join(' ')
+    );
+    return formattedSegments;
   };
 
-  const pageName = formatPageName(location.pathname);
+  const [pageName, subPageName] = formatPageName(location.pathname);
 
   return (
     <nav className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
@@ -22,11 +27,13 @@ const DashboardNavbar: React.FC = () => {
             <li className="breadcrumb-item text-sm">
               Pages
             </li>
-            <li className="breadcrumb-item text-sm text-dark active" aria-current="page">
-              {pageName}
-            </li>
+            {pageName && (
+              <li className="breadcrumb-item text-sm text-dark active" aria-current="page">
+                {pageName}
+              </li>
+            )}
           </ol>
-          <h6 className="font-weight-bolder mb-0">{pageName}</h6>
+          <h6 className="font-weight-bolder mb-0 mt-2">{subPageName || pageName}</h6>
         </nav>
       </div>
     </nav>

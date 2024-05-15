@@ -13,6 +13,7 @@ import Card from "@components/Dashboard/Card";
 import ElectionDetails from "@pages/ElectionDetails";
 import LeadingScreen from "@components/User/LoadingScreen";
 import ElectionsPage from "@pages/ElectionsPage";
+import ProfileCard from "@components/AboutUS/ProfileCard";
 const Testing: React.FC = () => {
 	return (
 		<>
@@ -21,10 +22,11 @@ const Testing: React.FC = () => {
 			{/* <SignUpPage /> */}
 			{/* <DashboardFooter /> */}
 			{/* <DashboardSidebar /> */}
-			<Dashboard />
+			{/* <Dashboard /> */}
 			{/* <ElectionDetails /> */}
 			{/* <LeadingScreen /> */}
 			{/* <ElectionsPage /> */}
+			<ProfileCard name="Ahmad Awwad" description="In the end it's him and I" role="Computer Science Student" photo="../src/assets/img/People/Ahmad_Awwad.jpg" githubUrl="www.github.com" linkedinUrl="www.linkedin.com" />
 		</>
 	);
 }

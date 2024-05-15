@@ -3,7 +3,6 @@ import Card from '@components/Dashboard/Card';
 import DashboardLayout from '@layouts/DashboardLayout';
 import LoadingScreen from '@components/User/LoadingScreen';
 import Divider from '@components/User/Divider';
-import { fetchElections } from '@utils/api';
 
 interface Elections {
     id: number;
