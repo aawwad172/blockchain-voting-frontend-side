@@ -2,7 +2,7 @@ import React from "react";
 
 export interface ProfileCardProps {
 	name: string;
-	role: string;
+	role?: string;
 	description?: string;
 	photo: string;
 	githubUrl?: string;
