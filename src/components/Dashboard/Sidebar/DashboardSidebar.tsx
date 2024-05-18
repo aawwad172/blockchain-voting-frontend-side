@@ -176,9 +176,9 @@ const DashboardSidebar: React.FC = () => {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<a
+							<Link
 								className="nav-link"
-								href="../pages/sign-in.html">
+								to={"/signin"}>
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 									<svg
 										fill="none"
@@ -204,7 +204,7 @@ const DashboardSidebar: React.FC = () => {
 									</svg>{" "}
 								</div>
 								<span className="nav-link-text ms-1">Logout</span>
-							</a>
+							</Link>
 						</li>
 					</ul>
 				</div>
