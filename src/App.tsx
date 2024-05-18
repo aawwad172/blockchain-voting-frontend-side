@@ -6,6 +6,7 @@ import Dashboard from "@pages/Dashboard";
 import ElectionDetails from "@pages/ElectionDetails";
 import ElectionsPage from "@pages/ElectionsPage";
 import AboutUsPage from "@pages/AboutUsPage";
+import ProfilePage from "@pages/ProfilePage";
 
 // This is the main component of the app. It will render the testing component and the sign in page.
 
@@ -39,8 +40,12 @@ function App() {
 					element={<ElectionsPage />}
 				/>
 				<Route
-					path="about-us"
+					path="/about-us"
 					element={<AboutUsPage inDashboard={true} />}
+				/>
+				<Route
+					path="/profile"
+					element={<ProfilePage />}
 				/>
 			</Routes>
 		</Router>

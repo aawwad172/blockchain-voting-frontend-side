@@ -27,6 +27,11 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 		}
 	}, [show]);
 
+	const handleConfirm = () => {
+		onConfirm();
+		onCancel(); // Close the modal after confirming
+	};
+
 	return (
 		<div>
 			<div
@@ -52,7 +57,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 								data-bs-dismiss="modal"
 								aria-label="Close"
 								onClick={onCancel}>
-								<span aria-hidden="true">×</span>
+								<span aria-hidden="true">x</span>
 							</button>
 						</div>
 						<div className="modal-body">
@@ -62,7 +67,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 							<button
 								type="button"
 								className="btn bg-gradient-primary"
-								onClick={onConfirm}>
+								onClick={handleConfirm}>
 								Confirm
 							</button>
 							<button

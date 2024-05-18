@@ -5,8 +5,8 @@ import TableHeader from "@components/Dashboard/Table/TableHeader";
 import TableCard from "@components/Dashboard/Table/TableCard";
 import DashboardLayout from "@layouts/DashboardLayout";
 import TableRow from "@components/Dashboard/Table/TableRow";
-import ConfirmationModal from "@components/Dashboard/ConfirmationModal";
-import AddElectionModal from "@components/Dashboard/AddElectionModal";
+import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal";
+import AddElectionModal from "@components/Dashboard/Modals/AddElectionModal";
 
 interface Election {
 	id: number;
@@ -41,15 +41,15 @@ const ElectionsPage: React.FC = () => {
 				id: 1,
 				title: "Local Elections",
 				startDate: "2022-05-15",
-				endDate: "2022-05-17",
-				year: calculateYear("2022-05-15", "2022-05-17"),
-				status: calculateStatus("2022-05-15", "2022-05-17"),
+				endDate: "2025-05-17",
+				year: calculateYear("2022-05-15", "2025-05-17"),
+				status: calculateStatus("2022-05-15", "2025-05-17"),
 			},
 			{
 				id: 2,
 				title: "National Elections",
-				startDate: "2023-05-15",
-				endDate: "2023-05-17",
+				startDate: "2021-05-15",
+				endDate: "2022-05-17",
 				year: calculateYear("2023-05-15", "2023-05-17"),
 				status: calculateStatus("2023-05-15", "2023-05-17"),
 			},
@@ -61,6 +61,7 @@ const ElectionsPage: React.FC = () => {
 				year: calculateYear("2021-05-15", "2021-05-17"),
 				status: calculateStatus("2021-05-15", "2021-05-17"),
 			},
+
 			// Add other records here...
 		];
 		setElections(staticData);
@@ -131,17 +132,20 @@ const ElectionsPage: React.FC = () => {
 	}, []);
 
 	const handleCheckboxChange = (electionId: number, checked: boolean) => {
+		console.log("Checkbox change:", { electionId, checked });
 		setSelectedRows((prev) =>
 			checked ? [...prev, electionId] : prev.filter((id) => id !== electionId)
 		);
 	};
 
 	const handleDeleteSelected = () => {
+		console.log("Delete selected rows");
 		setShowDeleteModal(true);
 	};
 
 	const confirmDelete = () => {
-		console.log("Deleting selected rows");
+		console.log("Confirm delete");
+		console.log("Selected rows before deletion:", selectedRows);
 		// Filter out the elections that are not in the selectedRows array
 		setElections((prevElections) =>
 			prevElections.filter((election) => !selectedRows.includes(election.id))
@@ -156,10 +160,12 @@ const ElectionsPage: React.FC = () => {
 	};
 
 	const cancelDelete = () => {
+		console.log("Cancel delete");
 		setShowDeleteModal(false);
 	};
 
 	const handleAddElection = () => {
+		console.log("Open add election modal");
 		setShowAddModal(true);
 	};
 
@@ -168,6 +174,7 @@ const ElectionsPage: React.FC = () => {
 		startDate: string;
 		endDate: string;
 	}) => {
+		console.log("Add new election:", newElection);
 		const newId =
 			elections.length > 0 ? Math.max(...elections.map((e) => e.id)) + 1 : 1;
 		const election = {
@@ -176,7 +183,7 @@ const ElectionsPage: React.FC = () => {
 			year: calculateYear(newElection.startDate, newElection.endDate),
 			status: calculateStatus(newElection.startDate, newElection.endDate),
 		};
-		console.log("Adding new election:", election);
+		console.log("Adding new election with ID:", newId);
 		setElections([...elections, election]);
 		setFilteredElections([...elections, election]);
 	};
@@ -238,10 +245,12 @@ const ElectionsPage: React.FC = () => {
 	const totalPages = Math.ceil(filteredElections.length / electionsPerPage);
 
 	const handlePrevPage = () => {
+		console.log("Go to previous page");
 		if (currentPage > 1) setCurrentPage(currentPage - 1);
 	};
 
 	const handleNextPage = () => {
+		console.log("Go to next page");
 		if (currentPage < totalPages) setCurrentPage(currentPage + 1);
 	};
 
@@ -419,7 +428,10 @@ const ElectionsPage: React.FC = () => {
 			/>
 			<AddElectionModal
 				show={showAddModal}
-				onClose={() => setShowAddModal(false)}
+				onClose={() => {
+					console.log("Closing modal");
+					setShowAddModal(false);
+				}}
 				onAddElection={addNewElection}
 			/>
 		</DashboardLayout>

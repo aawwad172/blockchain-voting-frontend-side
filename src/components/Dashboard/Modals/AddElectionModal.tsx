@@ -48,7 +48,7 @@ const AddElectionModal: React.FC<AddElectionModalProps> = ({
 				tabIndex={-1}
 				role="dialog"
 				aria-labelledby="modal-form"
-				aria-hidden="true">
+				aria-hidden={!show}>
 				<div
 					className="modal-dialog modal-dialog-centered modal-md"
 					role="document">
@@ -126,6 +126,7 @@ const AddElectionModal: React.FC<AddElectionModalProps> = ({
 					</div>
 				</div>
 			</div>
+			{show && <div className="modal-backdrop fade show"></div>}
 		</div>
 	);
 };

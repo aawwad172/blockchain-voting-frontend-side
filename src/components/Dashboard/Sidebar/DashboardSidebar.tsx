@@ -1,11 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@assets/css/soft-ui-dashboard.css";
-import { Link } from "react-router-dom";
-// Link of the our website logo 
+import { Link, useLocation } from "react-router-dom";
+// Link of the our website logo
 import logo from "@assets/img/logos/logo.jpg";
 
 const DashboardSidebar: React.FC = () => {
+	const location = useLocation();
+
 	return (
 		<>
 			<aside
@@ -17,9 +19,9 @@ const DashboardSidebar: React.FC = () => {
 						aria-hidden="true"
 						id="iconSidenav"
 					/>
-					<Link to="/dashboard"
-						className="navbar-brand m-0"
-					>
+					<Link
+						to="/dashboard"
+						className="navbar-brand m-0">
 						<img
 							src={logo}
 							className="navbar-brand-img h-100"
@@ -34,9 +36,11 @@ const DashboardSidebar: React.FC = () => {
 					id="sidenav-collapse-main">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<Link to={"/dashboard"}
-								className="nav-link active"
-							>
+							<Link
+								to="/dashboard"
+								className={`nav-link ${
+									location.pathname === "/dashboard" ? "active" : ""
+								}`}>
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 									<svg
 										width="12px"
@@ -75,9 +79,11 @@ const DashboardSidebar: React.FC = () => {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link to="/elections"
-								className="nav-link"
-							>
+							<Link
+								to="/elections"
+								className={`nav-link ${
+									location.pathname === "/elections" ? "active" : ""
+								}`}>
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 									<svg
 										width="12px"
@@ -123,9 +129,11 @@ const DashboardSidebar: React.FC = () => {
 							</h6>
 						</li>
 						<li className="nav-item">
-							<a
-								className="nav-link"
-								href="../pages/profile.html">
+							<Link
+								to="/profile"
+								className={`nav-link ${
+									location.pathname === "/profile" ? "active" : ""
+								}`}>
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 									<svg
 										width="12px"
@@ -165,14 +173,13 @@ const DashboardSidebar: React.FC = () => {
 									</svg>
 								</div>
 								<span className="nav-link-text ms-1">Profile</span>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
 							<a
 								className="nav-link"
 								href="../pages/sign-in.html">
 								<div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-									{/* TODO: Change this icon IDK how!! */}
 									<svg
 										fill="none"
 										height="24"
