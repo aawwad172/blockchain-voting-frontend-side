@@ -1,4 +1,4 @@
-// components/PageLayout.tsx
+// components/AuthLayout.tsx
 import React from "react";
 import Navbar from "@components/User/Navbar";
 import Footer from "@components/User/Footer";
@@ -7,7 +7,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const PageLayout: React.FC<Props> = ({ children }) => {
+const AuthLayout: React.FC<Props> = ({ children }) => {
 	return (
 		<>
 
@@ -18,4 +18,4 @@ const PageLayout: React.FC<Props> = ({ children }) => {
 	);
 };
 
-export default PageLayout;
+export default AuthLayout;

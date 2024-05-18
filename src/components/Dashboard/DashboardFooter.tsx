@@ -17,9 +17,9 @@ const DashboardFooter: React.FC = () => {
 					<div className="col-lg-6">
 						<ul className="nav nav-footer justify-content-center justify-content-lg-end">
 							<li className="nav-item">
-								<Link to="/about-us"
-									className="nav-link text-muted"
-									target="_blank">
+								<Link
+									to="/about-us"
+									className="nav-link text-muted">
 									About Us
 								</Link>
 							</li>
