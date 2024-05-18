@@ -10,10 +10,13 @@ type Props = {
 const AuthLayout: React.FC<Props> = ({ children }) => {
 	return (
 		<>
-
-			<Navbar />
-			{children}
-			<Footer />
+			<div className="g-sidenav-show d-flex flex-column min-vh-100">
+				<Navbar />
+				<main className="main-content position-relative flex-grow-1 d-flex flex-column h-100 border-radius-lg mt-5 pt-3">
+					<div className="container-fluid py-4 flex-grow-1">{children}</div>
+					<Footer />
+				</main>
+			</div>
 		</>
 	);
 };

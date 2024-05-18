@@ -12,6 +12,7 @@ export default defineConfig({
         '@assets': '/src/assets',
         '@test': '/test',
         '@utils': '/src/utils',
+        '@userAssets': '/src/userAssets',
       }
   }
 })

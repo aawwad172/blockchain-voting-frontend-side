@@ -1,45 +1,84 @@
 // components/Navbar.tsx
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "@assets/img/logos/logo.jpg";
 
 const Navbar: React.FC = () => {
+	const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual login state
+
 	return (
-		<nav className="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-			<div className="container-fluid pe-0">
-				<a
-					className="navbar-brand font-weight-bolder ms-lg-0 ms-3"
-					href="../pages/dashboard.html">
-					Soft UI Dashboard
-				</a>
-				<button
-					className="navbar-toggler shadow-none ms-2"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navigation"
-					aria-controls="navigation"
-					aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span className="navbar-toggler-icon mt-2">
-						<span className="navbar-toggler-bar bar1"></span>
-						<span className="navbar-toggler-bar bar2"></span>
-						<span className="navbar-toggler-bar bar3"></span>
-					</span>
-				</button>
-				<div className="collapse navbar-collapse" id="navigation">
-					<ul className="navbar-nav mx-auto ms-xl-auto me-xl-7">
-						<li className="nav-item">
-							<a
-								className="nav-link d-flex align-items-center me-2 active"
-								aria-current="page"
-								href="../pages/dashboard.html">
-								<i className="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-								Dashboard
-							</a>
-						</li>
-						{/* Additional nav items */}
-					</ul>
+		<>
+			{/* Navbar */}
+			<nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+				<div className="container-fluid">
+					<Link
+						to={"/Home"}
+						className="navbar-brand font-weight-bolder"
+						rel="tooltip"
+						title="Blockchain Voting System"
+						data-placement="bottom">
+						<img
+							src={logo}
+							alt="E-Voting System logo"
+							height={50}
+							width={50}
+							className="me-2"
+						/>
+						E-Voting System
+					</Link>
+					<button
+						className="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navigation"
+						aria-controls="navigation"
+						aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span className="navbar-toggler-icon"></span>
+					</button>
+					<div
+						className="collapse navbar-collapse"
+						id="navigation">
+						<ul className="navbar-nav ms-auto">
+							<li className="nav-item">
+								<Link
+									to={"/about-us"}
+									className="nav-link">
+									About Us
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link
+									to={"/contact-us"}
+									className="nav-link">
+									Contact Us
+								</Link>
+							</li>
+							<li className="nav-item">
+								{isLoggedIn ? (
+									<Link
+										to={"/logout"}
+										className="nav-link"
+										onClick={() => {
+											// Implement logout functionality here
+											setIsLoggedIn(false);
+										}}>
+										Logout
+									</Link>
+								) : (
+									<Link
+										to={"/signin"}
+										className="nav-link">
+										Sign In
+									</Link>
+								)}
+							</li>
+						</ul>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+			{/* End Navbar */}
+		</>
 	);
 };
 

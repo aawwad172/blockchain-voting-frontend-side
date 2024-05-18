@@ -7,19 +7,22 @@ import SignUpPage from "@pages/SignUpPage";
 import Navbar from "@components/User/Navbar";
 import DashboardNavbar from "@components/Dashboard/DashboardNavbar";
 import DashboardLayout from "@layouts/DashboardLayout";
-import Dashboard from "@pages/Dashboard";
+import Dashboard from "@pages/Admin/Dashboard";
 import DasbhaordLayout from "@layouts/DashboardLayout";
 import Card from "@components/Dashboard/Card";
-import ElectionDetails from "@pages/ElectionDetails";
+import ElectionDetails from "@pages/Admin/ElectionDetails";
 import LeadingScreen from "@components/User/LoadingScreen";
-import ElectionsPage from "@pages/ElectionsPage";
+import ElectionsPage from "@pages/Admin/ElectionsPage";
 import ProfileCard from "@components/AboutUs/ProfileCard";
 import TeamMembers from "@components/AboutUs/TeamMembers";
+import AuthLayout from "@layouts/AuthLayout";
 
 const Testing: React.FC = () => {
 	return (
 		<>
-			<Dashboard />
+			<AuthLayout>
+				<h2>hello world</h2>
+			</AuthLayout>
 		</>
 	);
 };

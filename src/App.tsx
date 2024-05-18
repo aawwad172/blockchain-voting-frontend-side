@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Testing from "@test/Testing";
 import SignInPage from "@pages/SignInPage";
 import SignUpPage from "@pages/SignUpPage";
-import Dashboard from "@pages/Dashboard";
-import ElectionDetails from "@pages/ElectionDetails";
-import ElectionsPage from "@pages/ElectionsPage";
+import Dashboard from "@pages/Admin/Dashboard";
+import ElectionDetails from "@pages/Admin/ElectionDetails";
+import ElectionsPage from "@pages/Admin/ElectionsPage";
 import AboutUsPage from "@pages/AboutUsPage";
-import ProfilePage from "@pages/ProfilePage";
+import ProfilePage from "@pages/Admin/ProfilePage";
 
 // This is the main component of the app. It will render the testing component and the sign in page.
 
@@ -47,6 +47,10 @@ function App() {
 					path="/profile"
 					element={<ProfilePage />}
 				/>
+				{/* <Route
+					path="/contact-us"
+					element={<ContactUsPage />}
+				/> */}
 			</Routes>
 		</Router>
 	);
