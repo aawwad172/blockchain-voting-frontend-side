@@ -1,25 +1,43 @@
 import React from "react";
 import ActionColumn from "./ActionColumn";
-import TitleColumn from "./TitleColumt";
+import TitleColumn from "./TitleColumn";
 import YearColumn from "./YearColumn";
-import StatusBadge from "./StatusBandge";
+import StatusBadge from "./StatusBadge";
+import TableCheckbox from "./TableCheckbox";
 
 interface TableRowProps {
-    electionId: number
-    title: string;
-    year: string;
-    status: string;
+	electionId: number;
+	title: string;
+	year: string;
+	startDate: string;
+	endDate: string;
+	status: string;
+	onCheckboxChange: (electionId: number, checked: boolean) => void;
+	checked: boolean;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ electionId, title, year, status }) => {
-    return (
-        <tr>
-            <TitleColumn title={title} />
-            <YearColumn year={year} />
-            <StatusBadge status={status} />
-            <ActionColumn electionId={electionId} />
-        </tr>
-    );
-}
+const TableRow: React.FC<TableRowProps> = ({
+	electionId,
+	title,
+	year,
+	startDate,
+	endDate,
+	status,
+	onCheckboxChange,
+	checked,
+}) => {
+	return (
+		<tr>
+			<TableCheckbox
+				checked={checked}
+				onChange={(checked) => onCheckboxChange(electionId, checked)}
+			/>
+			<TitleColumn title={title} />
+			<YearColumn year={year} />
+			<StatusBadge status={status} />
+			<ActionColumn electionId={electionId} />
+		</tr>
+	);
+};
 
 export default TableRow;

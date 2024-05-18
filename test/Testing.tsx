@@ -13,22 +13,15 @@ import Card from "@components/Dashboard/Card";
 import ElectionDetails from "@pages/ElectionDetails";
 import LeadingScreen from "@components/User/LoadingScreen";
 import ElectionsPage from "@pages/ElectionsPage";
-import ProfileCard from "@components/AboutUS/ProfileCard";
+import ProfileCard from "@components/AboutUs/ProfileCard";
+import TeamMembers from "@components/AboutUs/TeamMembers";
+
 const Testing: React.FC = () => {
 	return (
 		<>
-			{/* <DashboardNavbar /> */}
-			{/* <SignInPage /> */}
-			{/* <SignUpPage /> */}
-			{/* <DashboardFooter /> */}
-			{/* <DashboardSidebar /> */}
-			{/* <Dashboard /> */}
-			{/* <ElectionDetails /> */}
-			{/* <LeadingScreen /> */}
-			{/* <ElectionsPage /> */}
-			<ProfileCard name="Ahmad Awwad" description="In the end it's him and I" role="Computer Science Student" photo="../src/assets/img/People/Ahmad_Awwad.jpg" githubUrl="www.github.com" linkedinUrl="www.linkedin.com" />
+			<Dashboard />
 		</>
 	);
-}
+};
 
 export default Testing;
