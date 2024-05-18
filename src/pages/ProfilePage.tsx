@@ -1,7 +1,7 @@
 import DashboardLayout from "@layouts/DashboardLayout";
 import ProfileCard from "@components/AboutUs/ProfileCard";
 import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal"; // Ensure the path is correct
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface UserProfile {
 	firstName: string;
@@ -16,27 +16,45 @@ interface UserProfile {
 
 const ProfilePage: React.FC = () => {
 	const [editMode, setEditMode] = useState(false);
-	const [user, setUser] = useState<UserProfile>({
-		firstName: "John",
-		lastName: "Doe",
-		profilePic: "https://via.placeholder.com/150",
-	});
+	const [user, setUser] = useState<UserProfile | null>(null);
 	const [showModal, setShowModal] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		// Fetch user data when the component mounts
+		const fetchUserData = async () => {
+			try {
+				const response = await fetch("/api/user"); // Replace with your API endpoint
+				if (!response.ok) {
+					throw new Error("Failed to fetch user data");
+				}
+				const userData: UserProfile = await response.json();
+				setUser(userData);
+				setLoading(false);
+			} catch (error) {
+				setError(error.message);
+				setLoading(false);
+			}
+		};
+
+		fetchUserData();
+	}, []);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		setUser((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
+		setUser((prevState) =>
+			prevState ? { ...prevState, [name]: value } : null
+		);
 	};
 
 	const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files[0]) {
-			setUser((prevState) => ({
-				...prevState,
-				profilePic: URL.createObjectURL(e.target.files[0]),
-			}));
+			setUser((prevState) =>
+				prevState
+					? { ...prevState, profilePic: URL.createObjectURL(e.target.files[0]) }
+					: null
+			);
 		}
 	};
 
@@ -50,15 +68,41 @@ const ProfilePage: React.FC = () => {
 		setShowModal(true);
 	};
 
-	const handleConfirmSave = () => {
-		setShowModal(false);
-		setEditMode(false);
+	const handleConfirmSave = async () => {
+		// Post changes to the database
+		try {
+			await postChangesToDatabase(user);
+			setShowModal(false);
+			setEditMode(false);
+		} catch (error) {
+			console.error("Failed to save changes:", error);
+			// Handle error (e.g., show an error message to the user)
+		}
 	};
+
+	const postChangesToDatabase = async (updatedUser: UserProfile | null) => {
+		if (!updatedUser) return;
+		// Simulate an API call to save changes to the database
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				console.log("Changes saved to the database:", updatedUser);
+				resolve(true);
+			}, 1000);
+		});
+	};
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
 
 	return (
 		<DashboardLayout>
 			<div className="container-fluid">
-				{!editMode && (
+				{user && !editMode && (
 					<ProfileCard
 						name={`${user.firstName} ${user.lastName}`}
 						role={user.role}
@@ -69,7 +113,7 @@ const ProfilePage: React.FC = () => {
 						emailURL={user.emailURL}
 					/>
 				)}
-				{editMode && (
+				{user && editMode && (
 					<form>
 						<div className="mb-3">
 							<label
@@ -136,7 +180,7 @@ const ProfilePage: React.FC = () => {
 						</button>
 					</form>
 				)}
-				{!editMode && (
+				{user && !editMode && (
 					<button
 						className="btn btn-primary mt-3"
 						onClick={() => setEditMode(true)}>
