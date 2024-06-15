@@ -1,6 +1,6 @@
 import React from "react";
 import TeamMembers from "@components/AboutUs/TeamMembers";
-import { DashboardLayout, AuthLayout } from "@layouts/index";
+import { AdminDashboardLayout, AuthLayout } from "@layouts/index";
 
 interface AboutUsPageProps {
 	inDashboard: boolean;
@@ -37,9 +37,9 @@ const AboutUsPage: React.FC<AboutUsPageProps> = ({ inDashboard = true }) => {
 	return (
 		<>
 			{inDashboard ? (
-				<DashboardLayout>
+				<AdminDashboardLayout>
 					<TeamMembers profiles={profiles} />
-				</DashboardLayout>
+				</AdminDashboardLayout>
 			) : (
 				<AuthLayout>
 					<TeamMembers profiles={profiles} />

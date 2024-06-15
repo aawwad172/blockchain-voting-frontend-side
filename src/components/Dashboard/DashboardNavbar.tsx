@@ -5,17 +5,27 @@ const DashboardNavbar: React.FC = () => {
   const location = useLocation();
 
   // Function to convert pathname to a readable page and subpage name
-  const formatPageName = (pathname: string) => {
-    // Remove leading slash and split pathname into segments
-    const segments = pathname.replace(/^\//, '').split('/');
-    // Convert segments to readable format
-    const formattedSegments = segments.map(segment =>
-      segment.replace(/_/g, ' ').split(' ').map(word =>
-        word[0].toUpperCase() + word.slice(1)
-      ).join(' ')
-    );
-    return formattedSegments;
-  };
+const formatPageName = (pathname: string) => {
+	// Split the pathname by '/' and filter out empty strings
+	const path = pathname.split("/").filter((item) => item !== "");
+
+	// Helper function to process each segment
+	const formatSegment = (segment: string | undefined) => {
+		if (!segment) return segment;
+		return segment
+			.replace(/-/g, " ") // Replace hyphens with spaces
+			.split(" ") // Split by spaces to capitalize each word
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize first letter of each word
+			.join(" "); // Join words back together with spaces
+	};
+
+	// Extract and format the main page and subpage
+	const page = formatSegment(path[0]);
+	const subPage = formatSegment(path[1]);
+
+	// Return an array with the main page and subpage
+	return [page, subPage];
+};
 
   const [pageName, subPageName] = formatPageName(location.pathname);
 

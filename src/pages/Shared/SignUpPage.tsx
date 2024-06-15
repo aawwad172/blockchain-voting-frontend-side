@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Footer from "../components/User/Footer";
+import Footer from "@components/User/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../assets/css/soft-ui-dashboard.css";
-import backgroundImage from "../assets/img/curved-images/curved14.jpg";
-import logo from "../assets/img/logos/logo.jpg";
+import "@assets/css/soft-ui-dashboard.css";
+import backgroundImage from "@assets/img/curved-images/curved14.jpg";
+import logo from "@assets/img/logos/logo.jpg";
 
 const SignUpPage: React.FC = () => {
 	return (
@@ -81,7 +81,9 @@ const SignUpPage: React.FC = () => {
 													className="form-check-label"
 													htmlFor="flexCheckDefault">
 													I agree to the
-													<a href="#" className="text-dark font-weight-bolder">
+													<a
+														href="#"
+														className="text-dark font-weight-bolder">
 														Terms and Conditions
 													</a>
 												</label>

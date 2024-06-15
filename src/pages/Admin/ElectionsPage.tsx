@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort, faFilter } from "@fortawesome/free-solid-svg-icons";
 import TableHeader from "@components/Dashboard/Table/TableHeader";
 import TableCard from "@components/Dashboard/Table/TableCard";
-import DashboardLayout from "@layouts/DashboardLayout";
+import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
 import TableRow from "@components/Dashboard/Table/TableRow";
 import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal";
 import AddElectionModal from "@components/Dashboard/Modals/AddElectionModal";
@@ -371,7 +371,7 @@ const ElectionsPage: React.FC = () => {
 	);
 
 	return (
-		<DashboardLayout>
+		<AdminDashboardLayout>
 			<div className="container-fluid py-1">
 				<TableCard
 					headerTitle="Elections"
@@ -436,7 +436,7 @@ const ElectionsPage: React.FC = () => {
 				}}
 				onAddElection={addNewElection}
 			/>
-		</DashboardLayout>
+		</AdminDashboardLayout>
 	);
 };
 

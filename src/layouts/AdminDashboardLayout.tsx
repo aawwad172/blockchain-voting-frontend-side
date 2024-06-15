@@ -1,18 +1,16 @@
 import React from "react";
+import DashboardSidebar from "@components/Dashboard/Sidebar/DashboardSidebar";
 import DashboardNavbar from "@components/Dashboard/DashboardNavbar";
 import DashboardFooter from "@components/Dashboard/DashboardFooter";
-import SuperAdminDashboardSidebar from "@components/Dashboard/Sidebar/SuperAdminDashboardSidebar";
 
-type SuperAdminDashboardLayoutProps = {
+type Props = {
 	children: React.ReactNode;
 };
 
-const SuperAdminDashboardLayout: React.FC<SuperAdminDashboardLayoutProps> = ({
-	children,
-}) => {
+const AdminDashboardLayout = ({ children }: Props) => {
 	return (
 		<div className="g-sidenav-show d-flex flex-column min-vh-100">
-			<SuperAdminDashboardSidebar />
+			<DashboardSidebar />
 			<main className="main-content position-relative flex-grow-1 d-flex flex-column h-100 border-radius-lg">
 				<DashboardNavbar />
 				<div className="container-fluid py-4 flex-grow-1">{children}</div>
@@ -22,4 +20,4 @@ const SuperAdminDashboardLayout: React.FC<SuperAdminDashboardLayoutProps> = ({
 	);
 };
 
-export default SuperAdminDashboardLayout;
+export default AdminDashboardLayout;

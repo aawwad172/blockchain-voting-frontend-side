@@ -1,11 +1,11 @@
 // pages/SignInPage.tsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/User/Navbar";
-import Footer from "../components/User/Footer";
+import Navbar from "@components/User/Navbar";
+import Footer from "@components/User/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../assets/css/soft-ui-dashboard.css";
-import backgroundImage from "../assets/img/curved-images/curved6.jpg";
+import "@assets/css/soft-ui-dashboard.css";
+import backgroundImage from "@assets/img/curved-images/curved6.jpg";
 
 // Define TypeScript interface for form state
 interface IFormState {
@@ -60,7 +60,9 @@ const SignInPage: React.FC = () => {
 											</p>
 										</div>
 										<div className="card-body">
-											<form role="form" onSubmit={handleSubmit}>
+											<form
+												role="form"
+												onSubmit={handleSubmit}>
 												<label>Email</label>
 												<div className="mb-3">
 													<input

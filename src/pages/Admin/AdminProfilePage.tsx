@@ -1,9 +1,9 @@
-import DashboardLayout from "@layouts/DashboardLayout";
+import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
 import ProfileCard from "@components/AboutUs/ProfileCard";
 import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal"; // Ensure the path is correct
 import React, { useState } from "react";
 
-interface UserProfile {
+interface AdminProfile {
 	firstName: string;
 	lastName: string;
 	profilePic: string;
@@ -14,9 +14,9 @@ interface UserProfile {
 	emailURL?: string;
 }
 
-const ProfilePage: React.FC = () => {
+const AdminProfilePage: React.FC = () => {
 	const [editMode, setEditMode] = useState(false);
-	const [user, setUser] = useState<UserProfile>({
+	const [user, setUser] = useState<AdminProfile>({
 		firstName: "Ahmad ",
 		lastName: "Awwad",
 		profilePic: "/src/assets/img/people/ahmad-awwad.jpg",
@@ -62,7 +62,7 @@ const ProfilePage: React.FC = () => {
 		}
 	};
 
-	const postChangesToDatabase = async (updatedUser: UserProfile) => {
+	const postChangesToDatabase = async (updatedUser: AdminProfile) => {
 		// Simulate an API call to save changes to the database
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
@@ -73,7 +73,7 @@ const ProfilePage: React.FC = () => {
 	};
 
 	return (
-		<DashboardLayout>
+		<AdminDashboardLayout>
 			<div className="container-fluid">
 				{!editMode && (
 					<ProfileCard
@@ -168,8 +168,8 @@ const ProfilePage: React.FC = () => {
 					onCancel={() => setShowModal(false)}
 				/>
 			</div>
-		</DashboardLayout>
+		</AdminDashboardLayout>
 	);
 };
 
-export default ProfilePage;
+export default AdminProfilePage;

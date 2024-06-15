@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@assets/css/soft-ui-dashboard.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Link of the our website logo
 import logo from "@assets/img/logos/logo.jpg";
 import HomeIcon from "@components/Icons/HomeIcon";
@@ -10,10 +10,10 @@ import SideBarSection from "./SideBarSection";
 import ProfileIcon from "@components/Icons/ProfileIcon";
 import LogoutIcon from "@components/Icons/LogoutIcon";
 
-import SideBarButton from "./SideBarButton";
+import SideItem from "./SideItem";
 
 const DashboardSidebar: React.FC = () => {
-	const location = useLocation();
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -42,27 +42,32 @@ const DashboardSidebar: React.FC = () => {
 					className="collapse navbar-collapse w-auto"
 					id="sidenav-collapse-main">
 					<ul className="navbar-nav">
-						<SideBarButton
+						<SideItem
 							title="Dashboard"
 							route="/dashboard"
 							SVG={<HomeIcon />}
 						/>
-						<SideBarButton
+						<SideItem
 							title="Elections"
 							route="/elections"
 							SVG={<ElectionIcon />}
 						/>
 						<SideBarSection title="Account pages" />
 
-						<SideBarButton
+						<SideItem
 							title="Profile"
 							route="/profile"
 							SVG={<ProfileIcon />}
 						/>
-						<SideBarButton
+						<SideItem
 							title="logout"
 							route="/signin"
 							SVG={<LogoutIcon />}
+							onClick={() => {
+								// Remove the jwtToken from the local storage
+								localStorage.removeItem("jwtToken");
+								navigate("/signin");
+							}}
 						/>
 					</ul>
 				</div>

@@ -1,19 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-type SideBarButtonProps = {
+type SideItemProps = {
 	title: string;
 	SVG: React.ReactNode;
 	route: string;
 	onClick?: () => void;
 };
 
-const SideBarButton: React.FC<SideBarButtonProps> = ({
-	title,
-	SVG,
-	route,
-	onClick,
-}) => {
+const SideItem: React.FC<SideItemProps> = ({ title, SVG, route, onClick }) => {
 	const location = useLocation();
 
 	return (
@@ -32,4 +27,4 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
 	);
 };
 
-export default SideBarButton;
+export default SideItem;

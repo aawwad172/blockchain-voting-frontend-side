@@ -1,2 +1,2 @@
-export { default as DashboardLayout } from './DashboardLayout';
+export { default as AdminDashboardLayout } from './AdminDashboardLayout';
 export { default as AuthLayout } from './AuthLayout';
