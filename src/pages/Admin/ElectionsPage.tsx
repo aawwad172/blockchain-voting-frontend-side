@@ -17,6 +17,8 @@ interface Election {
 	status: string;
 }
 
+// ! Fix the previous button, to display the previous 10 pages only and the next button to display the next 10 pages only
+
 const ElectionsPage: React.FC = () => {
 	const [elections, setElections] = useState<Election[]>([]);
 	const [filteredElections, setFilteredElections] = useState<Election[]>([]);

@@ -10,7 +10,8 @@ const DashboardFooter: React.FC = () => {
 				<div className="row align-items-center justify-content-lg-between">
 					<div className="col-lg-6 mb-lg-0 mb-4">
 						<div className="copyright text-center text-sm text-muted text-lg-start">
-							© {currentYear}, made with <i className="fa fa-heart"></i> by Our
+							© {currentYear}, made with{" "}
+							<i className="fa fa-heart text-gradient text-primary"></i> by Our
 							Team.
 						</div>
 					</div>

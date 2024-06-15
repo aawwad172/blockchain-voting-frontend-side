@@ -13,11 +13,14 @@ import ProfilePage from "@pages/Admin/ProfilePage";
 function App() {
 	return (
 		<Router>
-			{/* <Testing /> This will always be rendered regardless of the path */}
 			<Routes>
 				<Route
 					path="/"
 					element={<Testing />}
+				/>
+				<Route
+					path="/home"
+					element={<Dashboard />}
 				/>
 				<Route
 					path="/signin"
@@ -47,10 +50,6 @@ function App() {
 					path="/profile"
 					element={<ProfilePage />}
 				/>
-				{/* <Route
-					path="/contact-us"
-					element={<ContactUsPage />}
-				/> */}
 			</Routes>
 		</Router>
 	);
