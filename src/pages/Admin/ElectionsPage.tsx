@@ -24,33 +24,66 @@ import {
 } from "@utils/electionUtils";
 import ErrorScreen from "@components/shared/ErrorScreen";
 
+/**
+ * The main component for displaying and managing elections.
+ * This component handles the state and logic for displaying elections,
+ * sorting, filtering, pagination, and modals for adding and deleting elections.
+ */
 const ElectionsPage: React.FC = () => {
+	// State variables
+
+	// Holds the list of elections fetched from the server or static data.
 	const [elections, setElections] = useState<Election[]>([]);
+
+	// Indicates whether the data is currently being loaded from the server.
 	const [loading, setLoading] = useState<boolean>(true);
+
+	// Stores any error that occurs during the data fetching process.
 	const [error, setError] = useState<Error | null>(null);
+
+	// Holds the list of elections after applying any filters or sorting.
 	const [filteredElections, setFilteredElections] = useState<Election[]>([]);
+
+	// Keeps track of the IDs of the elections that have been selected (checked) by the user.
 	const [selectedRows, setSelectedRows] = useState<number[]>([]);
+
+	// Stores the current page number for pagination.
 	const [currentPage, setCurrentPage] = useState(1);
+
+	// Indicates whether the "Select All" checkbox is checked.
 	const [selectAllChecked, setSelectAllChecked] = useState(false);
+
+	// Controls the visibility of the delete confirmation modal.
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+	// Controls the visibility of the add election modal.
 	const [showAddModal, setShowAddModal] = useState(false);
+
+	// Constant defining the number of elections to display per page.
 	const electionsPerPage = 10;
+
+	// Keeps track of the current sort order (ascending or descending).
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+	// Stores the current filter status applied to the list of elections.
 	const [filterStatus, setFilterStatus] = useState<
 		"all" | "pending" | "active" | "done"
 	>("all");
 
+	// Custom hook to fetch elections
 	useFetchElections({
 		setElections,
 		setLoading,
 		setError,
-		useStaticData: true,
+		useStaticData: true, // Use static data for testing
 	});
 
+	// Effect to update filtered elections when the elections state changes
 	useEffect(() => {
 		setFilteredElections(elections);
 	}, [elections]);
 
+	// Handle pagination
 	const { currentElections, totalPages, handlePrevPage, handleNextPage } =
 		handlePagination(
 			currentPage,
@@ -59,6 +92,7 @@ const ElectionsPage: React.FC = () => {
 			setCurrentPage
 		);
 
+	// Render loading screen if data is still loading
 	if (loading) {
 		return (
 			<AdminDashboardLayout>
@@ -67,6 +101,7 @@ const ElectionsPage: React.FC = () => {
 		);
 	}
 
+	// Render error screen if there was an error fetching data
 	if (error) {
 		return (
 			<AdminDashboardLayout>
@@ -75,6 +110,7 @@ const ElectionsPage: React.FC = () => {
 		);
 	}
 
+	// Main component render
 	return (
 		<AdminDashboardLayout>
 			<div className="container-fluid py-1">
@@ -131,8 +167,8 @@ const ElectionsPage: React.FC = () => {
 								startDate={election.startDate}
 								endDate={election.endDate}
 								status={election.status}
-								onCheckboxChange={() =>
-									handleCheckboxChange(election.id, true, setSelectedRows)
+								onCheckboxChange={(election, checked: boolean) =>
+									handleCheckboxChange(election, checked, setSelectedRows)
 								}
 								checked={selectedRows.includes(election.id)}
 							/>

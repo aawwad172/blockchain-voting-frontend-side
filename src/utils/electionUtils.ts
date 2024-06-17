@@ -14,7 +14,7 @@ export const handleCheckboxChange = (
 ) => {
 	console.log("Checkbox change:", { electionId, checked });
 	setSelectedRows((prev) =>
-		checked ? [...prev, electionId] : prev.filter((id) => id !== electionId)
+		checked ? prev.concat(electionId) : prev.filter((id) => id !== electionId)
 	);
 };
 
