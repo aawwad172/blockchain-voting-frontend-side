@@ -5,7 +5,7 @@ import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 interface TableCardProps {
 	headerTitle: string;
 	children: React.ReactNode;
-	onAddElection?: () => void;
+	onAddNew?: () => void;
 	onDeleteSelected?: () => void;
 	isDeleteDisabled?: boolean;
 	sortButton?: React.ReactNode; // Made optional
@@ -15,7 +15,7 @@ interface TableCardProps {
 const TableCard: React.FC<TableCardProps> = ({
 	headerTitle,
 	children,
-	onAddElection,
+	onAddNew,
 	onDeleteSelected,
 	isDeleteDisabled = true,
 	sortButton,
@@ -29,35 +29,39 @@ const TableCard: React.FC<TableCardProps> = ({
 					<div className="col-8 d-flex justify-content-end align-items-center">
 						{onDeleteSelected && (
 							<div
-								className={`d-flex justify-content-center align-items-center mx-2 ${
+								className={`d-flex justify-content-center align-items-center mx-2 mb-3 ${
 									isDeleteDisabled
 										? "text-danger-50"
-										: "text-gradient text-danger"
+										: "text-gradient text-primary"
 								}`}
 								style={{
 									cursor: isDeleteDisabled ? "not-allowed" : "pointer",
 								}}
-								onClick={isDeleteDisabled ? undefined : onDeleteSelected}>
+								onClick={isDeleteDisabled ? undefined : onDeleteSelected}
+								{...(!isDeleteDisabled && {
+									"data-bs-toggle": "modal",
+									"data-bs-target": "#modal-default",
+								})}>
 								<FontAwesomeIcon icon={faTrash} />
 							</div>
 						)}
-
+						{/* Fix: Fix the filter button and the Sort button, because they are not working after 
+							fixing the delete button */}
 						{filterButton && (
-							<div className="d-flex justify-content-center align-items-center mx-2">
+							<div className="d-flex justify-content-center align-items-center mx-2 mb-3">
 								{filterButton}
 							</div>
 						)}
 						{sortButton && (
-							<div className="d-flex justify-content-center align-items-center mx-2">
+							<div className="d-flex justify-content-center align-items-center mx-2 mb-3">
 								{sortButton}
 							</div>
 						)}
-						{/* // Fix the alignment of the button so it will be on the same level as other icons! */}
-						{onAddElection && (
+						{onAddNew && (
 							<div className="d-flex justify-content-center align-items-center mx-2">
 								<button
 									className="btn btn-xs bg-gradient-primary d-flex justify-content-center align-items-center"
-									onClick={onAddElection}
+									onClick={onAddNew}
 									style={{ cursor: "pointer" }}>
 									<FontAwesomeIcon icon={faPlus} />
 									<span className="mx-1">New</span>

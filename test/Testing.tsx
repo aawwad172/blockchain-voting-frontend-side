@@ -11,7 +11,7 @@ import Dashboard from "@pages/Admin/Dashboard";
 import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
 import Card from "@components/Dashboard/Card";
 import ElectionDetails from "@pages/Admin/ElectionDetails";
-import LeadingScreen from "@components/User/LoadingScreen";
+import LeadingScreen from "@components/shared/LoadingScreen";
 import ElectionsPage from "@pages/Admin/ElectionsPage";
 import ProfileCard from "@components/AboutUs/ProfileCard";
 import TeamMembers from "@components/AboutUs/TeamMembers";

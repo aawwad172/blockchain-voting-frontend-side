@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@components/Dashboard/Card';
 import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
-import LoadingScreen from "@components/User/LoadingScreen";
+import LoadingScreen from "@components/shared/LoadingScreen";
 import Divider from "@components/User/Divider";
 
 interface Elections {

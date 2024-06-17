@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchElections } from '@utils/api';  // Ensure the path matches your project structure
-import LoadingScreen from '@components/User/LoadingScreen'; // Assuming you have a loading component
+import LoadingScreen from '@components/shared/LoadingScreen'; // Assuming you have a loading component
 import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
 import TableCard from "@components/Dashboard/Table/TableCard";
 import TableHeader from "@components/Dashboard/Table/TableHeader";

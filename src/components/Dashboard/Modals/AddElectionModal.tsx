@@ -37,6 +37,13 @@ const AddElectionModal: React.FC<AddElectionModalProps> = ({
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		onAddElection({ title, year, startDate, endDate });
+
+		// Clear the form fields
+		setTitle("");
+		setYear("");
+		setStartDate("");
+		setEndDate("");
+
 		onClose();
 	};
 
