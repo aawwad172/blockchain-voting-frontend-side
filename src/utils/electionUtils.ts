@@ -214,12 +214,14 @@ export const handleFilter = (
  */
 export const handlePagination = (
 	currentPage: number,
-	electionsPerPage: number,
+	electionsPerPage: number = 10,
 	filteredElections: Election[],
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 ) => {
-	const indexOfLastElection = currentPage * electionsPerPage;
-	const indexOfFirstElection = indexOfLastElection - electionsPerPage;
+	let indexOfLastElection = currentPage * electionsPerPage;
+
+	let indexOfFirstElection = indexOfLastElection - electionsPerPage;
+
 	const currentElections = filteredElections.slice(
 		indexOfFirstElection,
 		indexOfLastElection
@@ -229,12 +231,22 @@ export const handlePagination = (
 
 	const handlePrevPage = () => {
 		console.log("Go to previous page");
-		if (currentPage > 1) setCurrentPage(currentPage - 1);
+		if (currentPage > 1) {
+			indexOfFirstElection = indexOfFirstElection - electionsPerPage;
+			indexOfLastElection = indexOfLastElection - electionsPerPage;
+			console.log("Previous page:", indexOfFirstElection, indexOfLastElection);
+			setCurrentPage(currentPage - 1);
+		}
 	};
 
 	const handleNextPage = () => {
 		console.log("Go to next page");
-		if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+		if (currentPage < totalPages) {
+			indexOfFirstElection = indexOfFirstElection + electionsPerPage;
+			indexOfLastElection = indexOfLastElection + electionsPerPage;
+			console.log("Next page:", indexOfFirstElection, indexOfLastElection);
+			setCurrentPage(currentPage + 1);
+		}
 	};
 
 	return { currentElections, totalPages, handlePrevPage, handleNextPage };

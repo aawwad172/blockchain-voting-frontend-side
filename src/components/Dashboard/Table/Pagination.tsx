@@ -35,7 +35,9 @@ const Pagination: React.FC<PaginationProps> = ({
 						key={number}
 						className={`page-item ${currentPage === number ? "active" : ""}`}>
 						<a
-							className="page-link text-white"
+							className={`page-link ${
+								currentPage === number ? "text-white" : ""
+							}`}
 							href="#"
 							onClick={() => setCurrentPage(number)}>
 							{number}
