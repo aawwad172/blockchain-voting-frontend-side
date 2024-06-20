@@ -30,6 +30,12 @@
       "@hooks/*": ["./src/hooks/*"],
       },  
     },
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
 
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
