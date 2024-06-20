@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../../ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,7 +9,6 @@ interface FilterButtonProps {
 const FilterButton: React.FC<FilterButtonProps> = ({ onFilter }) => {
 	return (
 		<div className="dropdown me-2">
-			<Button variant="outline">Hello</Button>
 			<div
 				className="d-flex justify-content-center align-items-center text-primary"
 				id="dropdownFilterButton"
