@@ -21,9 +21,13 @@ import SuperAdminDashboardLayout from "@layouts/SuperAdminDashboardLayout";
 const Testing: React.FC = () => {
 	return (
 		<>
-			<SuperAdminDashboardLayout>
+			{/* <SuperAdminDashboardLayout>
 				<h1>hello world</h1>
-			</SuperAdminDashboardLayout>
+			</SuperAdminDashboardLayout> */}
+
+			<AuthLayout>
+				<h1>Hello World</h1>
+			</AuthLayout>
 		</>
 	);
 };
