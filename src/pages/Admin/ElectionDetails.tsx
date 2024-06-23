@@ -1,80 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchElections } from '@utils/api';  // Ensure the path matches your project structure
-import LoadingScreen from '@components/shared/LoadingScreen'; // Assuming you have a loading component
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import LoadingScreen from "@components/shared/LoadingScreen"; // Assuming you have a loading component
 import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
 import TableCard from "@components/Dashboard/Table/TableCard";
 import TableHeader from "@components/Dashboard/Table/TableHeader";
-import TableRow from "@components/Dashboard/Table/TableRow";
-import Divider from "@components/User/Divider";
 import BarChart from "@components/Dashboard/Charts/BarChart";
-
-interface Candidate {
-	id: string;
-	name: string;
-	votes: number;
-}
-
-interface Election {
-	id: string;
-	title: string;
-	date: string;
-	numberOfCandidates: number;
-	totalVotes: number;
-	candidates: Candidate[];
-}
+import { Election } from "@hooks/types";
+import { useFetchElectionDetails } from "@hooks/useFetchElectionDetails";
+import { calculateYear } from "@utils/shared/helpers";
 
 const ElectionDetails: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const [election, setElection] = useState<Election | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<Error | null>(null);
 
-	// Function to load static data
-	const loadStaticData = () => {
-		const staticData: Election = {
-			id: "1",
-			title: "Election",
-			date: "2023 - 2024",
-			numberOfCandidates: 5,
-			totalVotes: 1000,
-			candidates: [
-				{ id: "1", name: "Candidate 1", votes: 200 },
-				{ id: "2", name: "Candidate 2", votes: 300 },
-				{ id: "3", name: "Candidate 3", votes: 150 },
-				{ id: "4", name: "Candidate 4", votes: 250 },
-				{ id: "5", name: "Candidate 5", votes: 100 },
-			],
-		};
-		setElection(staticData);
-	};
+	// TODO: Fix the useStaticData to false, because every time it's rendering the static data.
+	useFetchElectionDetails({
+		id: Number(id),
+		setElection,
+		setLoading,
+		setError,
+		useStaticData: false,
+	});
 
-	useEffect(() => {
-		setIsLoading(true);
-
-		// ? Remove the static data function when you finish the development
-		// Comment or uncomment the next line to toggle static data
-		loadStaticData();
-		setIsLoading(false); // Uncomment this too when using static data
-
-		// Dynamic data fetching
-		// fetchElections()
-		//     .then(elections => {
-		//         const foundElection = elections.find(election => election.id.toString() === id);
-		//         if (foundElection) {
-		//             setElection(foundElection);
-		//         } else {
-		//             setError('Election not found');
-		//         }
-		//         setIsLoading(false);
-		//     })
-		//     .catch(err => {
-		//         setError('Failed to fetch election details' + err);
-		//         setIsLoading(false);
-		//     });
-	}, [id]);
-
-	if (isLoading) {
+	if (loading) {
 		return (
 			<AdminDashboardLayout>
 				<LoadingScreen />
@@ -84,17 +34,34 @@ const ElectionDetails: React.FC = () => {
 
 	if (error) {
 		// TODO: Create a View for the Errors
-		return <div>{error}</div>;
+		return (
+			<AdminDashboardLayout>
+				<div>Error: {error.message}</div>
+			</AdminDashboardLayout>
+		);
 	}
 
 	if (!election) {
 		// TODO: Create a view for ElectionNotFound
-		return <div>Election not found.</div>;
+		return (
+			<AdminDashboardLayout>
+				<h2>Election Not Found</h2>
+			</AdminDashboardLayout>
+		);
 	}
+
+	const barChartData = election.candidates.map((candidate) => ({
+		label: candidate.name,
+		value: candidate.votes,
+	}));
 
 	return (
 		<AdminDashboardLayout>
-			<TableCard headerTitle={`${election.title}  ${election.date}`}>
+			<TableCard
+				headerTitle={`${election.title}  ${calculateYear(
+					election.startDate,
+					election.endDate
+				)}`}>
 				<TableHeader
 					columns={["Candidates", "Total Votes"]}
 					isCentered={true}
@@ -112,13 +79,7 @@ const ElectionDetails: React.FC = () => {
 			</TableCard>
 			<div className="row">
 				<div className="col-12">
-					<BarChart
-						data={[
-							{ label: "Ahmad", value: 450 },
-							{ label: "Yaman", value: 220 },
-							{ label: "Ali", value: 300 },
-						]}
-					/>
+					<BarChart data={barChartData} />
 				</div>
 			</div>
 		</AdminDashboardLayout>

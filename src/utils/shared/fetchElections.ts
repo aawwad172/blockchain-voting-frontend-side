@@ -1,21 +1,23 @@
 import axios from "axios";
+import { Election } from "@hooks/types";
+import { loadStaticElectionsData } from "@utils/shared/staticElectionsData";
 
-interface Election {
-	id: number;
-	title: string;
-	startDate: string;
-	endDate: string;
-	year: string;
-	status: string;
-}
+export const fetchElections = async (
+	useStaticData: boolean
+): Promise<Election[]> => {
+	if (useStaticData) {
+		return loadStaticElectionsData();
+	}
 
-export const fetchElections = async (): Promise<Election[]> => {
 	try {
-		// todo: Replace with real API endpoint
+		// Replace with real API endpoint
 		const response = await axios.get("https://api.example.com/elections");
 		return response.data;
 	} catch (error) {
-		console.error("Failed to fetch elections:", error);
-		throw error;
+		console.error(
+			"Failed to fetch elections from API, loading static data:",
+			error
+		);
+		return loadStaticElectionsData(); // Fallback to static data
 	}
 };

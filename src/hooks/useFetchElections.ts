@@ -1,15 +1,6 @@
 import { useEffect } from "react";
 import { fetchElections } from "@utils/shared/fetchElections";
-import { loadStaticElectionsData } from "@utils/shared/staticElectionsData";
-
-export interface Election {
-	id: number;
-	title: string;
-	startDate: string;
-	endDate: string;
-	year: string;
-	status: string;
-}
+import { Election } from "@hooks/types";
 
 type useFetchElectionsProps = {
 	setElections: React.Dispatch<React.SetStateAction<Election[]>>;
@@ -28,13 +19,8 @@ export const useFetchElections = ({
 		const getElections = async () => {
 			setLoading(true);
 			try {
-				if (useStaticData) {
-					const data = loadStaticElectionsData();
-					setElections(data);
-				} else {
-					const data = await fetchElections();
-					setElections(data);
-				}
+				const data = await fetchElections(useStaticData);
+				setElections(data);
 			} catch (err) {
 				setError(err as Error);
 			} finally {
