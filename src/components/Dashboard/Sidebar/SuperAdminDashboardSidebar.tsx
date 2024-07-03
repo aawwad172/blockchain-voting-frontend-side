@@ -38,7 +38,7 @@ const SuperAdminDashboardSidebar: React.FC = () => {
 				<ul className="navbar-nav">
 					<SideItem
 						title="Dashboard"
-						route="/superAdminDashboard"
+						route="/super-admin-dashboard"
 						SVG={<HomeIcon />}
 					/>
 					<SideItem

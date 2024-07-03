@@ -8,6 +8,7 @@ import ElectionsPage from "@pages/Admin/ElectionsPage";
 import AboutUsPage from "@pages/Shared/AboutUsPage";
 import ProfilePage from "@pages/Admin/AdminProfilePage";
 import SuperAdminProfilePage from "@pages/SuperAdmin/SuperAdminProfilePage";
+import SuperAdminDashboard from "@pages/SuperAdmin/SuperAdminDashboard";
 
 // This is the main component of the app. It will render the testing component and the sign in page.
 
@@ -54,6 +55,10 @@ function App() {
 				<Route
 					path="/super-admin-profile"
 					element={<SuperAdminProfilePage />}
+				/>
+				<Route
+					path="/super-admin-dashboard"
+					element={<SuperAdminDashboard />}
 				/>
 				<Route
 					path="/testing"

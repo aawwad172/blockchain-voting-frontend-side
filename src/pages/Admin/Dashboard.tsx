@@ -66,10 +66,7 @@ const Dashboard: React.FC = () => {
 								id={election.id}
 								title={election.title}
 								date={calculateYear(election.startDate, election.endDate)}
-								daysForElection={electionEndsIn(
-									election.startDate,
-									election.endDate
-								)}
+								daysForElection={electionEndsIn(election.endDate)}
 							/>
 						))}
 					</div>

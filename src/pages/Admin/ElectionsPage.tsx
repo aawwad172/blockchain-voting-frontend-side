@@ -75,7 +75,7 @@ const ElectionsPage: React.FC = () => {
 		setElections,
 		setLoading,
 		setError,
-		useStaticData: true, // Use static data for testing
+		useStaticData: false, // Use static data for testing
 	});
 
 	// Effect to update filtered elections when the elections state changes
