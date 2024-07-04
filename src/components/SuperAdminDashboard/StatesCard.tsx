@@ -8,7 +8,7 @@ interface StatesCardProps {
 
 const Card: React.FC<StatesCardProps> = ({ title, number, Icon }) => {
 	return (
-		<div className="col-xl-6 col-sm-6 mb-xl-4 mb-8">
+		<div className="col-xl-6 col-sm-6 mb-xl-4 mb-3">
 			<div className="card">
 				<div className="card-body p-3">
 					<div className="row">

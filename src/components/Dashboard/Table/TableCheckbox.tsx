@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TableCheckboxProps {
-	checked: boolean;
+	checked?: boolean;
 	onChange: (checked: boolean) => void;
 }
 

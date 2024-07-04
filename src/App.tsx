@@ -40,6 +40,10 @@ function App() {
 					path="/election/:id"
 					element={<ElectionDetails />}
 				/>
+				{/* <Route
+					path="/admin-profile/:id"
+					element={}
+				/> */}
 				<Route
 					path="/elections"
 					element={<ElectionsPage />}

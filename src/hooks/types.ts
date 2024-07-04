@@ -15,3 +15,10 @@ export interface Election {
 	totalVotes: number;
 	candidates: Candidate[];
 }
+
+export interface Admin {
+	id: number;
+	name: string;
+	companyName: string;
+	email: string;
+}
