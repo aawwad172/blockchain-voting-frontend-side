@@ -131,6 +131,11 @@ const ElectionsPage: React.FC = () => {
 									setSortOrder
 								)
 							}
+							criteria={[
+								{ key: "title", label: "Alphabetically" },
+								{ key: "startDate", label: "By Start Date" },
+								{ key: "endDate", label: "By End Date" },
+							]}
 						/>
 					}
 					filterButton={

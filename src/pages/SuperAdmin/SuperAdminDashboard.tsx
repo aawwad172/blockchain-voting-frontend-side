@@ -9,13 +9,14 @@ import TableHeader from "@components/Dashboard/Table/TableHeader";
 import SuperAdminTableRow from "@components/SuperAdminDashboard/SuperAdminTable/SuperAdminTableRow";
 import { Admin } from "@hooks/types";
 import { useFetchSuperAdminCombinedData } from "@hooks/useFetchSuperAdminCombinedData";
+import ErrorScreen from "@components/shared/ErrorScreen";
 
 const SuperAdminDashboard: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	const [admins, setAdmins] = useState<Admin[]>([]);
 	const [electionCount, setElectionCount] = useState<number>(0);
-	const useStaticData = true; // Change this to true to use static data
+	const useStaticData = true; // todo: Change this to true to use static data
 
 	useFetchSuperAdminCombinedData(
 		setLoading,
@@ -36,7 +37,7 @@ const SuperAdminDashboard: React.FC = () => {
 	if (error) {
 		return (
 			<SuperAdminDashboardLayout>
-				<div>Error: {error.message}</div>
+				<ErrorScreen errorMessage={error.message} />
 			</SuperAdminDashboardLayout>
 		);
 	}

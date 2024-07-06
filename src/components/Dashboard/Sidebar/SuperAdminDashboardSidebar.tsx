@@ -21,7 +21,7 @@ const SuperAdminDashboardSidebar: React.FC = () => {
 					id="iconSidenav"
 				/>
 				<Link
-					to="/superAdminDashboard"
+					to="/super-admin-dashboard"
 					className="navbar-brand m-0">
 					<img
 						src={logo}
@@ -43,7 +43,7 @@ const SuperAdminDashboardSidebar: React.FC = () => {
 					/>
 					<SideItem
 						title="Admins"
-						route="/adminsPage"
+						route="/admins-page"
 						SVG={<AdminIcon />}
 					/>
 					<SideBarSection title="Account pages" />
