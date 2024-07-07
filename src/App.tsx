@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "@assets/css/soft-ui-dashboard.css";
+import "@assets/css/nucleo-icons.css";
+import "@assets/css/nucleo-svg.css";
+
 import Testing from "@test/Testing";
 import SignInPage from "@pages/Shared/SignInPage";
 import SignUpPage from "@pages/Shared/SignUpPage";
@@ -11,7 +15,6 @@ import SuperAdminProfilePage from "@pages/SuperAdmin/SuperAdminProfilePage";
 import SuperAdminDashboard from "@pages/SuperAdmin/SuperAdminDashboard";
 import AdminsPage from "@pages/SuperAdmin/AdminsPage";
 
-// This is the main component of the app. It will render the testing component and the sign in page.
 
 function App() {
 	return (

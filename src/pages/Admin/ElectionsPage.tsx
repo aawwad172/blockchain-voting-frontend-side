@@ -66,9 +66,7 @@ const ElectionsPage: React.FC = () => {
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
 	// Stores the current filter status applied to the list of elections.
-	const [filterStatus, setFilterStatus] = useState<
-		"all" | "pending" | "active" | "done"
-	>("all");
+	const [filterStatus, setFilterStatus] = useState<string>("all");
 
 	// Custom hook to fetch elections
 	useFetchElections({
@@ -91,6 +89,46 @@ const ElectionsPage: React.FC = () => {
 			filteredElections,
 			setCurrentPage
 		);
+
+	interface FilterOption {
+		label: string;
+		value: "all" | "pending" | "active" | "done";
+	}
+
+	// Define filter options
+	const filterOptions: FilterOption[] = [
+		{ label: "All", value: "all" },
+		{ label: "Pending", value: "pending" },
+		{ label: "Active", value: "active" },
+		{ label: "Done", value: "done" },
+	];
+
+	const customHandleFilter = (value: string) => {
+		if (value === "all") {
+			setFilteredElections(elections);
+		} else if (value === "alphabetically") {
+			const sorted = [...elections].sort((a, b) =>
+				a.title.localeCompare(b.title)
+			);
+			setFilteredElections(sorted);
+		} else {
+			const filtered = elections.filter(
+				(election) => election.status === value
+			);
+			setFilteredElections(filtered);
+		}
+		setFilterStatus(value);
+	};
+
+	const customHandleSort = (criteria: string) => {
+		handleSort(
+			criteria,
+			filteredElections,
+			setFilteredElections,
+			sortOrder,
+			setSortOrder
+		);
+	};
 
 	// Render loading screen if data is still loading
 	if (loading) {
@@ -122,15 +160,7 @@ const ElectionsPage: React.FC = () => {
 					sortButton={
 						<SortButton
 							sortOrder={sortOrder}
-							onSort={(criteria) =>
-								handleSort(
-									criteria,
-									filteredElections,
-									setFilteredElections,
-									sortOrder,
-									setSortOrder
-								)
-							}
+							onSort={customHandleSort}
 							criteria={[
 								{ key: "title", label: "Alphabetically" },
 								{ key: "startDate", label: "By Start Date" },
@@ -140,14 +170,8 @@ const ElectionsPage: React.FC = () => {
 					}
 					filterButton={
 						<FilterButton
-							onFilter={(status) =>
-								handleFilter(
-									status,
-									elections,
-									setFilteredElections,
-									setFilterStatus
-								)
-							}
+							options={filterOptions}
+							onFilter={customHandleFilter}
 						/>
 					}>
 					<TableHeader
@@ -224,3 +248,4 @@ const ElectionsPage: React.FC = () => {
 };
 
 export default ElectionsPage;
+ 

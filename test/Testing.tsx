@@ -17,13 +17,53 @@ import ProfileCard from "@components/AboutUs/ProfileCard";
 import TeamMembers from "@components/AboutUs/TeamMembers";
 import AuthLayout from "@layouts/AuthLayout";
 import SuperAdminDashboardLayout from "@layouts/SuperAdminDashboardLayout";
+import FilterButton from "@components/Dashboard/Table/FilterButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+
+// interface FilterButtonProps {
+// 	onFilter: (status: "all" | "pending" | "active" | "done") => void;
+// }
 
 const Testing: React.FC = () => {
 	return (
 		<>
-			<AuthLayout>
-				<h1>Hello World</h1>
-			</AuthLayout>
+			<div className="dropdown">
+				<div
+					className="d-flex justify-content-center align-items-center text-primary"
+					id="dropdownFilterButton"
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+					onClick={() => console.log("Filter dropdown button clicked")}
+					style={{ cursor: "pointer" }}>
+					<FontAwesomeIcon icon={faFilter} />
+				</div>
+				<ul
+					className="dropdown-menu"
+					aria-labelledby="dropdownMenuButton">
+					<li>
+						<a
+							className="dropdown-item"
+							href="javascript:;">
+							Action
+						</a>
+					</li>
+					<li>
+						<a
+							className="dropdown-item"
+							href="javascript:;">
+							Another action
+						</a>
+					</li>
+					<li>
+						<a
+							className="dropdown-item"
+							href="javascript:;">
+							Something else here
+						</a>
+					</li>
+				</ul>
+			</div>
 		</>
 	);
 };
