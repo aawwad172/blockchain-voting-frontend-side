@@ -10,7 +10,7 @@ export const fetchElections = async (
 	}
 
 	try {
-		// Replace with your real API endpoint
+		// Todo: Replace with your real API endpoint
 		const response = await axios.get("http://localhost:3000/elections");
 		return response.data;
 	} catch (error) {

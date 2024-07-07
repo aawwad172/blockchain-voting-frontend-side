@@ -171,24 +171,7 @@ export const handleSort = (
  * @param {React.Dispatch<React.SetStateAction<Admin[]>>} setFilteredAdmins - The state setter for filtered admins.
  * @param {React.Dispatch<React.SetStateAction<"all" | "pending" | "active" | "done">>} setFilterStatus - The state setter for filter status.
  */
-export const handleFilter = (
-	status: "all" | "pending" | "active" | "done",
-	admins: Admin[],
-	setFilteredAdmins: React.Dispatch<React.SetStateAction<Admin[]>>,
-	setFilterStatus: React.Dispatch<
-		React.SetStateAction<"all" | "pending" | "active" | "done">
-	>
-) => {
-	console.log("Filtering by status:", status);
-	if (status === "all") {
-		setFilteredAdmins(admins);
-	} else {
-		const filtered = admins.filter((admin) => admin.status === status);
-		console.log("Filtered admins:", filtered);
-		setFilteredAdmins(filtered);
-	}
-	setFilterStatus(status);
-};
+
 
 /**
  * Handles the pagination logic for the admins table.

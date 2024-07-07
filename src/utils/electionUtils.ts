@@ -1,5 +1,6 @@
-import { Election } from "@hooks/useFetchElections"; // Assuming Election interface is defined in useFetchElections.ts
 import { calculateYear, calculateStatus } from "@utils/shared/helpers";
+import { Election } from "@hooks/types";
+import { Candidate } from "@hooks/types";
 
 /**
  * Updates the selected rows based on the checkbox change event.
@@ -101,6 +102,9 @@ export const addNewElection = (
 		id: newId,
 		year: calculateYear(newElection.startDate, newElection.endDate),
 		status: calculateStatus(newElection.startDate, newElection.endDate),
+		numberOfCandidates: 0,
+		totalVotes: 0,
+		candidates: [] as Candidate[],
 	};
 	console.log("Adding new election with ID:", newId);
 	setElections([...elections, election]);

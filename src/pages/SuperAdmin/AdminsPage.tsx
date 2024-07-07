@@ -1,11 +1,14 @@
-import TableCard from "@components/Dashboard/Table/TableCard";
-import TableHeader from "@components/Dashboard/Table/TableHeader";
-import SuperAdminDashboardLayout from "@layouts/SuperAdminDashboardLayout";
 import React, { useState, useEffect } from "react";
-import { Admin } from "@hooks/types";
-import LoadingScreen from "@components/shared/LoadingScreen";
-import ErrorScreen from "@components/shared/ErrorScreen";
+import TableHeader from "@components/Dashboard/Table/TableHeader";
+import TableCard from "@components/Dashboard/Table/TableCard";
+import SuperAdminDashboardLayout from "@layouts/SuperAdminDashboardLayout";
 import SuperAdminTableRow from "@components/SuperAdminDashboard/SuperAdminTable/SuperAdminTableRow";
+import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal";
+import AddAdminModal from "@components/SuperAdminDashboard/Modals/AddAdminModal";
+import Pagination from "@components/Dashboard/Table/Pagination";
+import LoadingScreen from "@components/shared/LoadingScreen";
+import { Admin } from "@hooks/types";
+import SortButton from "@components/Dashboard/Table/SortButton";
 import {
 	handleCheckboxChange,
 	handleDeleteSelected,
@@ -15,15 +18,16 @@ import {
 	addNewAdmin,
 	handleSelectAll,
 	handleSort,
-	handleFilter,
 	handlePagination,
 } from "@utils/adminUtils";
-import Pagination from "@components/Dashboard/Table/Pagination";
-import SortButton from "@components/Dashboard/Table/SortButton";
-import FilterButton from "@components/Dashboard/Table/FilterButton";
-import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal";
-// import AddAdminModal from "@components/Dashboard/Modals/AddAdminModal";
+import ErrorScreen from "@components/shared/ErrorScreen";
+import { useFetchAdmins } from "@hooks/useFetchAdmins";
 
+/**
+ * The main component for displaying and managing admins.
+ * This component handles the state and logic for displaying admins,
+ * sorting, filtering, pagination, and modals for adding and deleting admins.
+ */
 const AdminsPage: React.FC = () => {
 	// State variables
 
@@ -31,7 +35,7 @@ const AdminsPage: React.FC = () => {
 	const [admins, setAdmins] = useState<Admin[]>([]);
 
 	// Indicates whether the data is currently being loaded from the server.
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	// Stores any error that occurs during the data fetching process.
 	const [error, setError] = useState<Error | null>(null);
@@ -60,18 +64,8 @@ const AdminsPage: React.FC = () => {
 	// Keeps track of the current sort order (ascending or descending).
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-	// Stores the current filter status applied to the list of admins.
-	const [filterStatus, setFilterStatus] = useState<
-		"all" | "pending" | "active" | "done"
-	>("all");
-
-	// Custom hook to fetch admins (assuming similar to useFetchElections)
-	// useFetchAdmins({
-	//   setAdmins,
-	//   setLoading,
-	//   setError,
-	//   useStaticData: true, // Use static data for testing
-	// });
+	// Custom hook to fetch admins
+	useFetchAdmins({ setLoading, setError, setAdmins, useStaticData: true });
 
 	// Effect to update filtered admins when the admins state changes
 	useEffect(() => {
@@ -86,6 +80,16 @@ const AdminsPage: React.FC = () => {
 			filteredAdmins,
 			setCurrentPage
 		);
+
+	const customHandleSort = (criteria: string) => {
+		handleSort(
+			criteria as "name" | "companyName" | "email",
+			filteredAdmins,
+			setFilteredAdmins,
+			sortOrder,
+			setSortOrder
+		);
+	};
 
 	// Render loading screen if data is still loading
 	if (loading) {
@@ -117,31 +121,16 @@ const AdminsPage: React.FC = () => {
 					sortButton={
 						<SortButton
 							sortOrder={sortOrder}
-							onSort={(criteria) =>
-								handleSort(
-									criteria,
-									filteredAdmins,
-									setFilteredAdmins,
-									sortOrder,
-									setSortOrder
-								)
-							}
+							onSort={customHandleSort}
 							criteria={[
-								{ key: "name", label: "Alphabetically" },
+								{ key: "name", label: "By Name" },
 								{ key: "companyName", label: "By Company Name" },
 								{ key: "email", label: "By Email" },
 							]}
 						/>
-					}
-					filterButton={
-						<FilterButton
-							onFilter={(status) =>
-								handleFilter(status, admins, setFilteredAdmins, setFilterStatus)
-							}
-						/>
 					}>
 					<TableHeader
-						columns={["Admin Name", "Company Name", "Email", ""]}
+						columns={["Admin Name", "Company Name", "Email", "Actions"]}
 						onSelectAll={(checked) =>
 							handleSelectAll(
 								checked,
@@ -153,7 +142,7 @@ const AdminsPage: React.FC = () => {
 						selectAllChecked={selectAllChecked}
 					/>
 					<tbody>
-						{currentAdmins.map((admin: Admin) => (
+						{currentAdmins.map((admin) => (
 							<SuperAdminTableRow
 								key={admin.id}
 								adminId={admin.id}
@@ -192,7 +181,7 @@ const AdminsPage: React.FC = () => {
 				}
 				onCancel={() => cancelDelete(setShowDeleteModal)}
 			/>
-			{/* <AddAdminModal
+			<AddAdminModal
 				show={showAddModal}
 				onClose={() => {
 					console.log("Closing modal");
@@ -201,7 +190,7 @@ const AdminsPage: React.FC = () => {
 				onAddAdmin={(newAdmin) =>
 					addNewAdmin(newAdmin, admins, setAdmins, setFilteredAdmins)
 				}
-			/> */}
+			/>
 		</SuperAdminDashboardLayout>
 	);
 };

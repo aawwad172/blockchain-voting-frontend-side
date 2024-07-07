@@ -7,7 +7,8 @@ import ConfirmationModal from "@components/Dashboard/Modals/ConfirmationModal";
 import AddElectionModal from "@components/Dashboard/Modals/AddElectionModal";
 import Pagination from "@components/Dashboard/Table/Pagination";
 import LoadingScreen from "@components/shared/LoadingScreen";
-import { useFetchElections, Election } from "@hooks/useFetchElections";
+import { useFetchElections } from "@hooks/useFetchElections";
+import { Election } from "@hooks/types";
 import SortButton from "@components/Dashboard/Table/SortButton";
 import FilterButton from "@components/Dashboard/Table/FilterButton";
 import {
@@ -106,11 +107,6 @@ const ElectionsPage: React.FC = () => {
 	const customHandleFilter = (value: string) => {
 		if (value === "all") {
 			setFilteredElections(elections);
-		} else if (value === "alphabetically") {
-			const sorted = [...elections].sort((a, b) =>
-				a.title.localeCompare(b.title)
-			);
-			setFilteredElections(sorted);
 		} else {
 			const filtered = elections.filter(
 				(election) => election.status === value
@@ -122,7 +118,7 @@ const ElectionsPage: React.FC = () => {
 
 	const customHandleSort = (criteria: string) => {
 		handleSort(
-			criteria,
+			criteria as "title" | "startDate" | "endDate",
 			filteredElections,
 			setFilteredElections,
 			sortOrder,
