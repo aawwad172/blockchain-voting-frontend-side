@@ -69,6 +69,7 @@ const AdminsPage: React.FC = () => {
 
 	// Effect to update filtered admins when the admins state changes
 	useEffect(() => {
+		console.log("Updating filteredAdmins");
 		setFilteredAdmins(admins);
 	}, [admins]);
 
@@ -82,6 +83,7 @@ const AdminsPage: React.FC = () => {
 		);
 
 	const customHandleSort = (criteria: string) => {
+		console.log("Sorting admins by", criteria);
 		handleSort(
 			criteria as "name" | "companyName" | "email",
 			filteredAdmins,
@@ -93,6 +95,7 @@ const AdminsPage: React.FC = () => {
 
 	// Render loading screen if data is still loading
 	if (loading) {
+		console.log("Rendering loading screen");
 		return (
 			<SuperAdminDashboardLayout>
 				<LoadingScreen />
@@ -102,6 +105,7 @@ const AdminsPage: React.FC = () => {
 
 	// Render error screen if there was an error fetching data
 	if (error) {
+		console.log("Rendering error screen");
 		return (
 			<SuperAdminDashboardLayout>
 				<ErrorScreen errorMessage={error.message} />
@@ -115,8 +119,14 @@ const AdminsPage: React.FC = () => {
 			<div className="container-fluid py-1">
 				<TableCard
 					headerTitle="Admins"
-					onAddNew={() => handleAddAdmin(setShowAddModal)}
-					onDeleteSelected={() => handleDeleteSelected(setShowDeleteModal)}
+					onAddNew={() => {
+						console.log("Opening add admin modal");
+						handleAddAdmin(setShowAddModal);
+					}}
+					onDeleteSelected={() => {
+						console.log("Opening delete confirmation modal");
+						handleDeleteSelected(setShowDeleteModal);
+					}}
 					isDeleteDisabled={selectedRows.length === 0}
 					sortButton={
 						<SortButton
@@ -131,14 +141,15 @@ const AdminsPage: React.FC = () => {
 					}>
 					<TableHeader
 						columns={["Admin Name", "Company Name", "Email", "Actions"]}
-						onSelectAll={(checked) =>
+						onSelectAll={(checked) => {
+							console.log("Selecting all admins", checked);
 							handleSelectAll(
 								checked,
 								filteredAdmins,
 								setSelectedRows,
 								setSelectAllChecked
-							)
-						}
+							);
+						}}
 						selectAllChecked={selectAllChecked}
 					/>
 					<tbody>
@@ -150,9 +161,10 @@ const AdminsPage: React.FC = () => {
 								companyName={admin.companyName}
 								email={admin.email}
 								checked={selectedRows.includes(admin.id)}
-								onCheckboxChange={(adminId, checked: boolean) =>
-									handleCheckboxChange(adminId, checked, setSelectedRows)
-								}
+								onCheckboxChange={(adminId, checked: boolean) => {
+									console.log("Checkbox change", adminId, checked);
+									handleCheckboxChange(adminId, checked, setSelectedRows);
+								}}
 							/>
 						))}
 					</tbody>
@@ -169,7 +181,8 @@ const AdminsPage: React.FC = () => {
 				show={showDeleteModal}
 				title="Confirm Deletion"
 				message="Are you sure you want to delete the selected admins?"
-				onConfirm={() =>
+				onConfirm={() => {
+					console.log("Confirming deletion");
 					confirmDelete(
 						selectedRows,
 						setAdmins,
@@ -177,8 +190,8 @@ const AdminsPage: React.FC = () => {
 						setSelectedRows,
 						setSelectAllChecked,
 						setShowDeleteModal
-					)
-				}
+					);
+				}}
 				onCancel={() => cancelDelete(setShowDeleteModal)}
 			/>
 			<AddAdminModal

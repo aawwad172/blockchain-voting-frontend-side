@@ -21,6 +21,7 @@ const AddElectionModal: React.FC<AddAdminModalProps> = ({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		console.log("Adding admin:", { name, companyName, email });
 		onAddAdmin({ name, companyName, email });
 
 		// Clear the form fields
@@ -64,7 +65,10 @@ const AddElectionModal: React.FC<AddAdminModalProps> = ({
 												placeholder="name"
 												aria-label="name"
 												value={name}
-												onChange={(e) => setName(e.target.value)}
+												onChange={(e) => {
+													console.log("Name changed:", e.target.value);
+													setName(e.target.value);
+												}}
 												required
 											/>
 										</div>
@@ -77,7 +81,10 @@ const AddElectionModal: React.FC<AddAdminModalProps> = ({
 												placeholder="Company Name"
 												aria-label="Company Name"
 												value={companyName}
-												onChange={(e) => setCompanyName(e.target.value)}
+												onChange={(e) => {
+													console.log("Company Name changed:", e.target.value);
+													setCompanyName(e.target.value);
+												}}
 												required
 											/>
 										</div>
@@ -90,7 +97,10 @@ const AddElectionModal: React.FC<AddAdminModalProps> = ({
 												placeholder="email"
 												aria-label="email"
 												value={email}
-												onChange={(e) => setEmail(e.target.value)}
+												onChange={(e) => {
+													console.log("Email changed:", e.target.value);
+													setEmail(e.target.value);
+												}}
 												required
 											/>
 										</div>
@@ -108,7 +118,10 @@ const AddElectionModal: React.FC<AddAdminModalProps> = ({
 										type="button"
 										className="btn btn-link ml-auto"
 										data-bs-dismiss="modal"
-										onClick={onClose}>
+										onClick={() => {
+											console.log("Closing modal");
+											onClose();
+										}}>
 										Close
 									</button>
 								</div>

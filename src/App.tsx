@@ -14,7 +14,7 @@ import ProfilePage from "@pages/Admin/AdminProfilePage";
 import SuperAdminProfilePage from "@pages/SuperAdmin/SuperAdminProfilePage";
 import SuperAdminDashboard from "@pages/SuperAdmin/SuperAdminDashboard";
 import AdminsPage from "@pages/SuperAdmin/AdminsPage";
-
+import AdminProfilePage from "@pages/SuperAdmin/AdminDetails";
 
 function App() {
 	return (
@@ -55,6 +55,10 @@ function App() {
 				<Route
 					path="/admins-page"
 					element={<AdminsPage />}
+				/>
+				<Route
+					path="/admin-profile/:adminId"
+					element={<AdminProfilePage />}
 				/>
 				<Route
 					path="/about-us"
