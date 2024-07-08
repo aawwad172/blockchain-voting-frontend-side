@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import DropdownMenu from "@components/Dashboard/Table/DropDownMenu"; // Import the new DropdownMenu component
+import styled from "styled-components";
+import { fontString } from "chart.js/helpers";
 
 interface TableCardProps {
 	headerTitle: string;
@@ -21,50 +24,101 @@ const TableCard: React.FC<TableCardProps> = ({
 	sortButton,
 	filterButton,
 }) => {
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+	const handleResize = () => {
+		setIsMobile(window.innerWidth < 768);
+	};
+
+	useEffect(() => {
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
 	return (
 		<div className="card mb-3">
 			<div className="card-header pb-0">
 				<div className="row">
-					<h6 className="col-4">{headerTitle}</h6>
-					<div className="col-8 d-flex justify-content-end align-items-center">
-						{onDeleteSelected && (
+					<h6
+						className="col-lg-4 col-6 "
+						style={isMobile ? { fontSize: "18px" } : {}}>
+						{headerTitle}
+					</h6>
+					<div className="col-lg-8 col-6 d-flex justify-content-end align-items-center">
+						{isMobile ? (
 							<div
-								className={`d-flex justify-content-center align-items-center mx-2 mb-3 ${
-									isDeleteDisabled
-										? "text-danger-50"
-										: "text-gradient text-primary"
-								}`}
-								style={{
-									cursor: isDeleteDisabled ? "not-allowed" : "pointer",
-								}}
-								onClick={isDeleteDisabled ? undefined : onDeleteSelected}
-								{...(!isDeleteDisabled && {
-									"data-bs-toggle": "modal",
-									"data-bs-target": "#modal-default",
-								})}>
-								<FontAwesomeIcon icon={faTrash} />
+								className="mb-3 mx-2"
+								style={{ fontSize: "16px" }}>
+								<DropdownMenu
+									components={[
+										sortButton,
+										filterButton,
+										<div
+											key="delete"
+											className={`d-flex justify-content-center align-items-center ${
+												isDeleteDisabled
+													? "text-danger-50"
+													: "text-gradient text-primary"
+											}`}
+											style={{
+												cursor: isDeleteDisabled ? "not-allowed" : "pointer",
+											}}
+											onClick={isDeleteDisabled ? undefined : onDeleteSelected}
+											{...(!isDeleteDisabled && {
+												"data-bs-toggle": "modal",
+												"data-bs-target": "#modal-default",
+											})}>
+											<FontAwesomeIcon icon={faTrash} />
+											<span className="ms-2">Delete</span>
+										</div>,
+									]}
+								/>
 							</div>
-						)}
-						{/* Fix: Fix the filter button and the Sort button, because they are not working after 
-							fixing the delete button */}
-						{filterButton && (
-							<div className="d-flex justify-content-center align-items-center mx-2 mb-3">
-								{filterButton}
-							</div>
-						)}
-						{sortButton && (
-							<div className="d-flex justify-content-center align-items-center mx-2 mb-3">
-								{sortButton}
-							</div>
+						) : (
+							<>
+								{onDeleteSelected && (
+									<div
+										className={`d-flex justify-content-center align-items-center mx-2 mb-3 ${
+											isDeleteDisabled
+												? "text-danger-50"
+												: "text-gradient text-primary"
+										}`}
+										style={{
+											cursor: isDeleteDisabled ? "not-allowed" : "pointer",
+										}}
+										onClick={isDeleteDisabled ? undefined : onDeleteSelected}
+										{...(!isDeleteDisabled && {
+											"data-bs-toggle": "modal",
+											"data-bs-target": "#modal-default",
+										})}>
+										<FontAwesomeIcon icon={faTrash} />
+									</div>
+								)}
+								{filterButton && (
+									<div className="d-flex justify-content-center align-items-center mx-2 mb-3">
+										{filterButton}
+									</div>
+								)}
+								{sortButton && (
+									<div className="d-flex justify-content-center align-items-center mx-2 mb-3">
+										{sortButton}
+									</div>
+								)}
+							</>
 						)}
 						{onAddNew && (
 							<div className="d-flex justify-content-center align-items-center mx-2">
 								<button
-									className="btn btn-xs bg-gradient-primary d-flex justify-content-center align-items-center"
+									className="btn  bg-gradient-primary d-flex justify-content-center align-items-center"
 									onClick={onAddNew}
-									style={{ cursor: "pointer" }}>
+									style={{
+										cursor: "pointer",
+										padding: "0.5rem 1rem",
+									}}>
 									<FontAwesomeIcon icon={faPlus} />
-									<span className="mx-1">New</span>
+									<span className="mx-1 d-none d-md-inline">New</span>
 								</button>
 							</div>
 						)}
