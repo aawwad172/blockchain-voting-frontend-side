@@ -1,23 +1,33 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Testing from "@test/Testing";
-import SignInPage from "@pages/SignInPage";
-import SignUpPage from "@pages/SignUpPage";
-import Dashboard from "@pages/Dashboard";
-import ElectionDetails from "@pages/ElectionDetails";
-import ElectionsPage from "@pages/ElectionsPage";
-import AboutUsPage from "@pages/AboutUsPage";
-import ProfilePage from "@pages/ProfilePage";
+import "@assets/css/soft-ui-dashboard.css";
+import "@assets/css/nucleo-icons.css";
+import "@assets/css/nucleo-svg.css";
 
-// This is the main component of the app. It will render the testing component and the sign in page.
+import Testing from "@test/Testing";
+import SignInPage from "@pages/Shared/SignInPage";
+import SignUpPage from "@pages/Shared/SignUpPage";
+import Dashboard from "@pages/Admin/Dashboard";
+import ElectionDetails from "@pages/Admin/ElectionDetails";
+import ElectionsPage from "@pages/Admin/ElectionsPage";
+import AboutUsPage from "@pages/Shared/AboutUsPage";
+import ProfilePage from "@pages/Admin/AdminProfilePage";
+import SuperAdminProfilePage from "@pages/SuperAdmin/SuperAdminProfilePage";
+import SuperAdminDashboard from "@pages/SuperAdmin/SuperAdminDashboard";
+import AdminsPage from "@pages/SuperAdmin/AdminsPage";
+import AdminProfilePage from "@pages/SuperAdmin/AdminDetails";
+import HomePage from "@components/User/HomePage";
 
 function App() {
 	return (
 		<Router>
-			{/* <Testing /> This will always be rendered regardless of the path */}
 			<Routes>
 				<Route
 					path="/"
-					element={<Testing />}
+					element={<HomePage />}
+				/>
+				<Route
+					path="/home"
+					element={<Dashboard />}
 				/>
 				<Route
 					path="/signin"
@@ -35,17 +45,41 @@ function App() {
 					path="/election/:id"
 					element={<ElectionDetails />}
 				/>
+				{/* <Route
+					path="/admin-profile/:id"
+					element={}
+				/> */}
 				<Route
 					path="/elections"
 					element={<ElectionsPage />}
 				/>
 				<Route
+					path="/admins-page"
+					element={<AdminsPage />}
+				/>
+				<Route
+					path="/admin-profile/:adminId"
+					element={<AdminProfilePage />}
+				/>
+				<Route
 					path="/about-us"
-					element={<AboutUsPage inDashboard={true} />}
+					element={<AboutUsPage />}
 				/>
 				<Route
 					path="/profile"
 					element={<ProfilePage />}
+				/>
+				<Route
+					path="/super-admin-profile"
+					element={<SuperAdminProfilePage />}
+				/>
+				<Route
+					path="/super-admin-dashboard"
+					element={<SuperAdminDashboard />}
+				/>
+				<Route
+					path="/testing"
+					element={<Testing />}
 				/>
 			</Routes>
 		</Router>

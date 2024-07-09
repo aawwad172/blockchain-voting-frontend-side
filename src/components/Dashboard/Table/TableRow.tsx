@@ -30,7 +30,12 @@ const TableRow: React.FC<TableRowProps> = ({
 		<tr>
 			<TableCheckbox
 				checked={checked}
-				onChange={(checked) => onCheckboxChange(electionId, checked)}
+				onChange={(checked) => {
+					console.log(
+						`TableCheckBox has Checked: ${checked} and it's id is: ${electionId}`
+					);
+					onCheckboxChange(electionId, checked);
+				}}
 			/>
 			<TitleColumn title={title} />
 			<YearColumn year={year} />

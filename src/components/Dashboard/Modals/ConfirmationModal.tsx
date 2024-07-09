@@ -15,21 +15,10 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 	onConfirm,
 	onCancel,
 }) => {
-	useEffect(() => {
-		const modalElement = document.getElementById("modal-default");
-		if (modalElement) {
-			const modal = new bootstrap.Modal(modalElement);
-			if (show) {
-				modal.show();
-			} else {
-				modal.hide();
-			}
-		}
-	}, [show]);
+	useEffect(() => {}, [show]);
 
 	const handleConfirm = () => {
 		onConfirm();
-		onCancel(); // Close the modal after confirming
 	};
 
 	return (
@@ -57,7 +46,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 								data-bs-dismiss="modal"
 								aria-label="Close"
 								onClick={onCancel}>
-								<span aria-hidden="true">x</span>
+								<span aria-hidden="true">×</span>
 							</button>
 						</div>
 						<div className="modal-body">
@@ -67,13 +56,15 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 							<button
 								type="button"
 								className="btn bg-gradient-primary"
-								onClick={handleConfirm}>
+								onClick={handleConfirm}
+								data-bs-dismiss="modal">
 								Confirm
 							</button>
 							<button
 								type="button"
 								className="btn btn-link ml-auto"
 								data-bs-dismiss="modal"
+								aria-label="Close"
 								onClick={onCancel}>
 								Close
 							</button>

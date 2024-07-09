@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TableCheckboxProps {
-	checked: boolean;
+	checked?: boolean;
 	onChange: (checked: boolean) => void;
 }
 
@@ -13,7 +13,10 @@ const TableCheckbox: React.FC<TableCheckboxProps> = ({ checked, onChange }) => {
 					className="form-check-input"
 					type="checkbox"
 					checked={checked}
-					onChange={(e) => onChange(e.target.checked)}
+					onChange={(e) => {
+						console.log(`TableCheckBox has Checked: ${e.target.checked}`);
+						onChange(e.target.checked);
+					}}
 					id="flexCheckDefault"
 				/>
 			</div>
