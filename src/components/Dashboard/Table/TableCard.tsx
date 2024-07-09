@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import DropdownMenu from "@components/Dashboard/Table/DropDownMenu"; // Import the new DropdownMenu component
-import styled from "styled-components";
-import { fontString } from "chart.js/helpers";
 
 interface TableCardProps {
 	headerTitle: string;
@@ -111,7 +109,7 @@ const TableCard: React.FC<TableCardProps> = ({
 						{onAddNew && (
 							<div className="d-flex justify-content-center align-items-center mx-2">
 								<button
-									className="btn  bg-gradient-primary d-flex justify-content-center align-items-center"
+									className="btn bg-gradient-primary d-flex justify-content-center align-items-center"
 									onClick={onAddNew}
 									style={{
 										cursor: "pointer",

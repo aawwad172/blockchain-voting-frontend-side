@@ -40,21 +40,21 @@ const Navbar: React.FC = () => {
 						className="collapse navbar-collapse"
 						id="navigation">
 						<ul className="navbar-nav ms-auto">
-							<li className="nav-item">
+							<li className="nav-item text-primary text-gradient">
 								<Link
 									to={"/about-us"}
 									className="nav-link">
 									About Us
 								</Link>
 							</li>
-							<li className="nav-item">
+							<li className="nav-item text-primary text-gradient">
 								<Link
 									to={"/contact-us"}
 									className="nav-link">
 									Contact Us
 								</Link>
 							</li>
-							<li className="nav-item">
+							<li className="nav-item text-primary text-gradient">
 								{isLoggedIn ? (
 									<Link
 										to={"/logout"}

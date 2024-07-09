@@ -15,6 +15,7 @@ import SuperAdminProfilePage from "@pages/SuperAdmin/SuperAdminProfilePage";
 import SuperAdminDashboard from "@pages/SuperAdmin/SuperAdminDashboard";
 import AdminsPage from "@pages/SuperAdmin/AdminsPage";
 import AdminProfilePage from "@pages/SuperAdmin/AdminDetails";
+import HomePage from "@components/User/HomePage";
 
 function App() {
 	return (
@@ -22,7 +23,7 @@ function App() {
 			<Routes>
 				<Route
 					path="/"
-					element={<Testing />}
+					element={<HomePage />}
 				/>
 				<Route
 					path="/home"
@@ -62,7 +63,7 @@ function App() {
 				/>
 				<Route
 					path="/about-us"
-					element={<AboutUsPage inDashboard={true} />}
+					element={<AboutUsPage />}
 				/>
 				<Route
 					path="/profile"
