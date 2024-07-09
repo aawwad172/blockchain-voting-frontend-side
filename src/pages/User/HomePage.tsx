@@ -64,7 +64,7 @@ const HomePage: React.FC = () => {
 					<div className="cta-buttons">
 						<Link
 							className="btn bg-gradient-primary btn-lg mx-2"
-							to="/signin?redirect=/elections">
+							to="/signin?redirect=/userAuth/elections">
 							View Elections
 						</Link>
 						<Link

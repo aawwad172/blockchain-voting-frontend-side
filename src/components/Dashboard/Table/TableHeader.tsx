@@ -6,6 +6,9 @@ interface TableHeaderProps {
 	isCentered?: boolean;
 	onSelectAll?: (checked: boolean) => void;
 	selectAllChecked?: boolean;
+	onRadioButton?: (checked: boolean) => void;
+	radioButtonChecked?: boolean;
+	radioButtonName?: string;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -23,6 +26,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 						onChange={onSelectAll}
 					/>
 				)}
+
 				{columns.map((column, index) => (
 					<th
 						key={index}

@@ -19,9 +19,8 @@ const Footer: React.FC = () => {
 						<ul className="nav flex-row ms-n3 justify-content-lg-start justify-content-center mb-4 mt-sm-0">
 							<li className="nav-item">
 								<Link
-									to="/home"
+									to="/"
 									className="nav-link text-white opacity-8"
-									target="_blank"
 									rel="noopener noreferrer">
 									Home
 								</Link>
@@ -30,7 +29,6 @@ const Footer: React.FC = () => {
 								<Link
 									to="/about-us"
 									className="nav-link text-white opacity-8"
-									target="_blank"
 									rel="noopener noreferrer">
 									About
 								</Link>

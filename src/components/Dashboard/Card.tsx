@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ElectionPaperIcon from "@components/Icons/ElectionPaperIcon";
+import { useAuth } from "@contexts/AuthContext";
 
 interface CardProps {
 	id: number;
@@ -12,6 +13,8 @@ interface CardProps {
 // fixme: Implement the `daysForElection` logic when to write '${} Days Left to end' and when to write '${} Days left to start'
 
 const Card: React.FC<CardProps> = ({ id, title, date, daysForElection }) => {
+	const { isLoggedIn, userRole } = useAuth();
+
 	return (
 		<div className="col-xl-6 col-sm-6 mb-xl-4 mb-3">
 			<div className="card">
@@ -37,7 +40,12 @@ const Card: React.FC<CardProps> = ({ id, title, date, daysForElection }) => {
 								{daysForElection}
 							</p>
 							{/* TODO: Fix how the route should look like: with ID or Name or What! */}
-							<Link to={`/election/${id}`}>
+							<Link
+								to={
+									useAuth().userRole === "admin"
+										? `/admin/election/${id}`
+										: `authUser/election/${id}`
+								}>
 								<div>
 									More Details
 									<i

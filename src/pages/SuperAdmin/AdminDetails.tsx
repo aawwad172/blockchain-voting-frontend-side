@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import SuperAdminDashboardLayout from "@layouts/SuperAdminDashboardLayout";
 import { Admin } from "@hooks/types";
-import { updateAdminDetails } from "@utils/shared/updateAdminDetails";
+import { updateAdminDetails } from "@services/userServices";
 import LoadingScreen from "@components/shared/LoadingScreen";
 import ErrorScreen from "@components/shared/ErrorScreen";
 import { useFetchAdminById } from "@hooks/useFetchAdminById";

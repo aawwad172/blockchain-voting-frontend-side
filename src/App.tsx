@@ -15,9 +15,14 @@ import SuperAdminProfilePage from "@pages/SuperAdmin/SuperAdminProfilePage";
 import SuperAdminDashboard from "@pages/SuperAdmin/SuperAdminDashboard";
 import AdminsPage from "@pages/SuperAdmin/AdminsPage";
 import AdminProfilePage from "@pages/SuperAdmin/AdminDetails";
-import HomePage from "@components/User/HomePage";
+import HomePage from "@pages/User/HomePage";
+import { useAuth } from "@contexts/AuthContext";
+import ContactUs from "@pages/Shared/ContactUs";
+import UserElectionsPage from "@pages/User/UserElectionsPage";
+import CandidatesPage from "@pages/User/CandidatesPage";
 
 function App() {
+	const { isLoggedIn, userRole } = useAuth();
 	return (
 		<Router>
 			<Routes>
@@ -27,7 +32,7 @@ function App() {
 				/>
 				<Route
 					path="/home"
-					element={<Dashboard />}
+					element={isLoggedIn ? <HomePage /> : <SignInPage />}
 				/>
 				<Route
 					path="/signin"
@@ -45,14 +50,15 @@ function App() {
 					path="/election/:id"
 					element={<ElectionDetails />}
 				/>
-				{/* <Route
-					path="/admin-profile/:id"
-					element={}
-				/> */}
 				<Route
-					path="/elections"
+					path="elections"
 					element={<ElectionsPage />}
 				/>
+				<Route
+					path="/userAuth/elections"
+					element={<UserElectionsPage />}
+				/>
+
 				<Route
 					path="/admins-page"
 					element={<AdminsPage />}
@@ -62,15 +68,23 @@ function App() {
 					element={<AdminProfilePage />}
 				/>
 				<Route
+					path="/authUser/election/:id"
+					element={<CandidatesPage />}
+				/>
+				<Route
 					path="/about-us"
 					element={<AboutUsPage />}
+				/>
+				<Route
+					path="/contact-us"
+					element={<ContactUs />}
 				/>
 				<Route
 					path="/profile"
 					element={<ProfilePage />}
 				/>
 				<Route
-					path="/super-admin-profile"
+					path="/super-admin-profile/:adminId"
 					element={<SuperAdminProfilePage />}
 				/>
 				<Route
