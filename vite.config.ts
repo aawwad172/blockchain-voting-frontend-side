@@ -15,6 +15,8 @@ export default defineConfig({
 			"@userAssets": "/src/userAssets",
 			"@hooks": "/src/hooks",
 			"@types": "/src/types",
+			"@contexts": "/src/contexts",
+			"@services": "/src/services",
 		},
 	},
 });

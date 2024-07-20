@@ -20,10 +20,15 @@ import SuperAdminDashboardLayout from "@layouts/SuperAdminDashboardLayout";
 import FilterButton from "@components/Dashboard/Table/FilterButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import UserElectionsPage from "@pages/User/UserElectionsPage";
+import { useAuth } from "@contexts/AuthContext";
+import TableCard from "@components/Dashboard/Table/TableCard";
+import TableHeader from "@components/Dashboard/Table/TableHeader";
+import TableRow from "@components/Dashboard/Table/TableRow";
+import SortButton from "@components/Dashboard/Table/SortButton";
 
-
-const Testing: React.FC = () => {
-	return <></>;
+const Testing = () => {
+	return <> </>;
 };
 
 export default Testing;

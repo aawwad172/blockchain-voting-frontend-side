@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchElection } from "@utils/shared/fetchElection";
+import { fetchElection } from "@services/electionServices";
 import { Election } from "@hooks/types";
 
 type useFetchElectionDetailsProps = {

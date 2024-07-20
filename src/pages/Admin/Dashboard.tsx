@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
 		setElections,
 		setLoading,
 		setError,
-		useStaticData: true,
+		useStaticData: false,
 	});
 
 	// Fix: Fix the sorting of elections by end date

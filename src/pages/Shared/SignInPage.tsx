@@ -1,6 +1,7 @@
-// pages/SignInPage.tsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "@contexts/AuthContext"; // Import the useAuth hook
 import Navbar from "@components/User/Navbar";
 import Footer from "@components/User/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,12 +16,14 @@ interface IFormState {
 }
 
 const SignInPage: React.FC = () => {
-	// Initialize form state using useState hook
 	const [formData, setFormData] = useState<IFormState>({
 		email: "",
 		password: "",
 		rememberMe: false,
 	});
+
+	const { login } = useAuth(); // Use the login function from AuthContext
+	const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
 	// Handle input changes
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +39,35 @@ const SignInPage: React.FC = () => {
 	};
 
 	// Handle form submission
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		console.log("Form Data:", formData);
-		// TODO: mplement actual sign-in logic here
+
+		try {
+			const response = await axios.post("http://localhost:4000/login", {
+				email: formData.email,
+				password: formData.password,
+			});
+
+			console.log("Login Response:", response.data);
+
+			// Store the token using AuthContext login method
+			login(response.data.accessToken);
+
+			// Redirect user based on role
+			if (response.data.role === "superadmin") {
+				navigate("/super-admin-dashboard");
+			} else if (response.data.role === "student") {
+				navigate("/userAuth/elections");
+			} else {
+				// Handle other roles or redirect to a default page
+				navigate("/dashboard");
+			}
+		} catch (error) {
+			console.error("Login Error:", error);
+			// Handle login error (e.g., show an error message)
+			alert("Login failed. Please check your credentials.");
+		}
 	};
 
 	return (

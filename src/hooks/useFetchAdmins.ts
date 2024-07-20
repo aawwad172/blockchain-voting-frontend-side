@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchAdmins } from "@utils/SuperAdminDashboardUtils/fetchAdmins";
+import { fetchAdmins } from "@services/userServices";
 import { Admin } from "@hooks/types";
 
 type useFetchAdminsProps = {

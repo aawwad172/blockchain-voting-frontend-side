@@ -7,6 +7,7 @@ import { Election } from "@hooks/types";
 import ErrorMessage from "@components/shared/ErrorScreen";
 import { calculateYear, electionEndsIn } from "@utils/shared/helpers";
 import LoadingScreen from "@components/shared/LoadingScreen";
+import { useAuth } from "@contexts/AuthContext"; // Import the useAuth hook
 
 const HomePage: React.FC = () => {
 	const [elections, setElections] = useState<Election[]>([]);
@@ -14,6 +15,8 @@ const HomePage: React.FC = () => {
 	const [error, setError] = useState<Error | null>(null);
 	const [availableElections, setAvailableElections] = useState<Election[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
+
+	const { isLoggedIn } = useAuth(); // Get the login state
 
 	useFetchElections({
 		setElections,
@@ -64,12 +67,16 @@ const HomePage: React.FC = () => {
 					<div className="cta-buttons">
 						<Link
 							className="btn bg-gradient-primary btn-lg mx-2"
-							to="/signin?redirect=/elections">
+							to={
+								isLoggedIn
+									? "/userAuth/elections"
+									: "/signin?redirect=/userAuth/elections"
+							}>
 							View Elections
 						</Link>
 						<Link
 							className="btn btn-secondary btn-lg mx-2"
-							to="/signin?redirect=/dashboard">
+							to={isLoggedIn ? "/dashboard" : "/signin?redirect=/dashboard"}>
 							Create Election
 						</Link>
 					</div>

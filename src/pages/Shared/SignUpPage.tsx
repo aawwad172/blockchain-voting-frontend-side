@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "@components/User/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,6 +7,27 @@ import backgroundImage from "@assets/img/curved-images/curved14.jpg";
 import logo from "@assets/img/logos/logo.jpg";
 
 const SignUpPage: React.FC = () => {
+	const [name, setName] = useState("");
+	const [companyName, setCompanyName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [termsChecked, setTermsChecked] = useState(false);
+
+	const handleSendRequest = (e: React.FormEvent) => {
+		e.preventDefault();
+		setName("");
+		setCompanyName("");
+		setEmail("");
+		setPassword("");
+		setTermsChecked(false);
+		setPhoneNumber("");
+
+		alert(
+			"Request sent successfully! We will contact you as soon as possible."
+		);
+	};
+
 	return (
 		<>
 			<main className="main-content mt-0">
@@ -42,14 +63,29 @@ const SignUpPage: React.FC = () => {
 										</div>
 									</div>
 									<div className="card-body">
-										<form role="form text-left">
+										<form
+											role="form text-left"
+											onSubmit={handleSendRequest}>
 											<div className="mb-3">
 												<input
 													type="text"
 													className="form-control"
 													placeholder="Name"
 													aria-label="Name"
-													aria-describedby="email-addon"
+													aria-describedby="name-addon"
+													value={name}
+													onChange={(e) => setName(e.target.value)}
+												/>
+											</div>
+											<div className="mb-3">
+												<input
+													type="text"
+													className="form-control"
+													placeholder="Company Name"
+													aria-label="Company Name"
+													aria-describedby="company-name-addon"
+													value={companyName}
+													onChange={(e) => setCompanyName(e.target.value)}
 												/>
 											</div>
 											<div className="mb-3">
@@ -59,6 +95,8 @@ const SignUpPage: React.FC = () => {
 													placeholder="Email"
 													aria-label="Email"
 													aria-describedby="email-addon"
+													value={email}
+													onChange={(e) => setEmail(e.target.value)}
 												/>
 											</div>
 											<div className="mb-3">
@@ -68,38 +106,52 @@ const SignUpPage: React.FC = () => {
 													placeholder="Password"
 													aria-label="Password"
 													aria-describedby="password-addon"
+													value={password}
+													onChange={(e) => setPassword(e.target.value)}
+												/>
+											</div>
+											<div className="mb-3">
+												<input
+													type="tel"
+													className="form-control"
+													placeholder="Phone Number (e.g., +1234567890)"
+													aria-label="Phone Number"
+													aria-describedby="phone-number-addon"
+													value={phoneNumber}
+													onChange={(e) => setPhoneNumber(e.target.value)}
 												/>
 											</div>
 											<div className="form-check form-check-info text-left">
 												<input
 													className="form-check-input"
 													type="checkbox"
-													defaultValue=""
-													id="flexCheckDefault"
+													id="termsCheck"
+													checked={termsChecked}
+													onChange={(e) => setTermsChecked(e.target.checked)}
 												/>
 												<label
 													className="form-check-label"
-													htmlFor="flexCheckDefault">
-													I agree to the
+													htmlFor="termsCheck">
+													<span>I agree to the</span>
 													<a
 														href="#"
 														className="text-dark font-weight-bolder">
-														Terms and Conditions
+														<span> Terms and Conditions</span>
 													</a>
 												</label>
 											</div>
 											<div className="text-center">
 												<button
-													type="button"
-													className="btn bg-gradient-dark w-100 my-4 mb-2">
-													Sign up
+													type="submit"
+													className="btn bg-gradient-dark w-100 my-4 mb-2"
+													disabled={!termsChecked}>
+													Send Request
 												</button>
 											</div>
 											<p className="text-sm mt-3 mb-0">
 												Already have an account?
 												<Link
-													to={"/signin"}
-													// TODO: Add the Sign In route here
+													to="/signin"
 													className="text-dark font-weight-bolder">
 													Sign in
 												</Link>

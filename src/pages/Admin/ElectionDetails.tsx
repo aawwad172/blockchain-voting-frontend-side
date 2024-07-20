@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingScreen from "@components/shared/LoadingScreen"; // Assuming you have a loading component
 import AdminDashboardLayout from "@layouts/AdminDashboardLayout";
 import TableCard from "@components/Dashboard/Table/TableCard";
 import TableHeader from "@components/Dashboard/Table/TableHeader";
 import BarChart from "@components/Dashboard/Charts/BarChart";
-import { Election } from "@hooks/types";
+import { Candidate, Election } from "@hooks/types";
 import { useFetchElectionDetails } from "@hooks/useFetchElectionDetails";
 import { calculateYear } from "@utils/shared/helpers";
+import { useFetchCandidates } from "@hooks/useFetchCandidates";
 
 const ElectionDetails: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const [election, setElection] = useState<Election | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
+	const [candidates, setCandidates] = useState<Candidate[]>([]);
 
 	// TODO: Fix the useStaticData to false, because every time it's rendering the static data.
 	useFetchElectionDetails({
@@ -21,6 +23,14 @@ const ElectionDetails: React.FC = () => {
 		setElection,
 		setLoading,
 		setError,
+		useStaticData: false,
+	});
+
+	useFetchCandidates({
+		electionId: Number(id),
+		setLoading,
+		setError,
+		setCandidates,
 		useStaticData: false,
 	});
 
@@ -50,7 +60,7 @@ const ElectionDetails: React.FC = () => {
 		);
 	}
 
-	const barChartData = election.candidates.map((candidate) => ({
+	const barChartData = candidates.map((candidate) => ({
 		label: candidate.name,
 		value: candidate.votes,
 	}));

@@ -24,6 +24,7 @@ import {
 	handlePagination,
 } from "@utils/electionUtils";
 import ErrorScreen from "@components/shared/ErrorScreen";
+import { calculateStatus, calculateYear } from "@utils/shared/helpers";
 
 /**
  * The main component for displaying and managing elections.
@@ -188,10 +189,10 @@ const ElectionsPage: React.FC = () => {
 								key={election.id}
 								electionId={election.id}
 								title={election.title}
-								year={election.year}
+								year={calculateYear(election.startDate, election.endDate)}
 								startDate={election.startDate}
 								endDate={election.endDate}
-								status={election.status}
+								status={calculateStatus(election.startDate, election.endDate)}
 								onCheckboxChange={(election, checked: boolean) =>
 									handleCheckboxChange(election, checked, setSelectedRows)
 								}
