@@ -5,6 +5,22 @@ import { Candidate } from "@hooks/types";
 export const loadStaticElectionsData = () => {
 	const staticData: Election[] = [
 		{
+			id: 0,
+			title: "Student Council",
+			startDate: "2024-07-12",
+			endDate: "2024-07-15",
+			year: calculateYear("2024-07-12", "2024-07-15"),
+			status: calculateYear("2024-07-12", "2024-07-15"),
+			numberOfCandidates: 3,
+			totalVotes: 1000,
+			candidates: [
+				{ id: "1", name: "John Doe", votes: 500, major: "Computer Science" },
+				{ id: "2", name: "Jane Doe", votes: 300, major: "Computer Science" },
+				{ id: "3", name: "John Smith", votes: 200, major: "Computer Science" },
+			],
+		},
+
+		{
 			id: 1,
 			title: "Local Elections",
 			startDate: "1801-03-12",
@@ -14,9 +30,9 @@ export const loadStaticElectionsData = () => {
 			numberOfCandidates: 3,
 			totalVotes: 1000,
 			candidates: [
-				{ id: "1", name: "John Doe", votes: 500 },
-				{ id: "2", name: "Jane Doe", votes: 300 },
-				{ id: "3", name: "John Smith", votes: 200 },
+				{ id: "1", name: "John Doe", votes: 500, major: "Computer Science" },
+				{ id: "2", name: "Jane Doe", votes: 300, major: "Computer Science" },
+				{ id: "3", name: "John Smith", votes: 200, major: "Computer Science" },
 			],
 		},
 		{
@@ -29,10 +45,25 @@ export const loadStaticElectionsData = () => {
 			numberOfCandidates: 4,
 			totalVotes: 2000,
 			candidates: [
-				{ id: "4", name: "Alice Johnson", votes: 800 },
-				{ id: "5", name: "Bob Brown", votes: 700 },
-				{ id: "6", name: "Charlie Davis", votes: 300 },
-				{ id: "7", name: "Diana Wilson", votes: 200 },
+				{
+					id: "4",
+					name: "Alice Johnson",
+					votes: 800,
+					major: "Computer Science",
+				},
+				{ id: "5", name: "Bob Brown", votes: 700, major: "Computer Science" },
+				{
+					id: "6",
+					name: "Charlie Davis",
+					votes: 300,
+					major: "Computer Science",
+				},
+				{
+					id: "7",
+					name: "Diana Wilson",
+					votes: 200,
+					major: "Computer Science",
+				},
 			],
 		},
 		{

@@ -1,6 +1,6 @@
 // useFetchSuperAdminCombinedData.ts
 import { useEffect } from "react";
-import { fetchSuperAdminCombinedData } from "@utils/SuperAdminDashboardUtils/fetchSuperAdminCombinedData";
+import { fetchSuperAdminCombinedData } from "@services/userServices";
 import { Admin } from "./types";
 
 export const useFetchSuperAdminCombinedData = (

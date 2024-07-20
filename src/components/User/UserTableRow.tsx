@@ -1,12 +1,10 @@
 import React from "react";
 import TableRadio from "@components/Dashboard/Table/TableRadio";
 import CandidateNameColumn from "@components/User/CandidateNameColumn";
-import CandidateMajorColumn from "@components/User/CandidateMajorColumn";
 
 interface UserTableRowProps {
 	candidateId: string;
 	candidateName: string;
-	candidateMajor: string;
 	onChange?: (candidateId: string, checked: boolean) => void;
 	checked: boolean;
 }
@@ -14,7 +12,6 @@ interface UserTableRowProps {
 const UserTableRow: React.FC<UserTableRowProps> = ({
 	candidateId,
 	candidateName,
-	candidateMajor,
 	onChange = () => {}, // Provide a default no-op function
 	checked,
 }) => {
@@ -31,7 +28,6 @@ const UserTableRow: React.FC<UserTableRowProps> = ({
 				name="electionCandidates"
 			/>
 			<CandidateNameColumn candidateName={candidateName} />
-			<CandidateMajorColumn major={candidateMajor} />
 		</tr>
 	);
 };

@@ -6,18 +6,20 @@ import React, {
 	useEffect,
 	ReactNode,
 } from "react";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; // Correct import for jwt-decode
 
 type UserRole = "admin" | "superAdmin" | "authUser";
 
 interface DecodedToken {
 	exp: number;
 	role: UserRole;
+	email: string; // Include email in the decoded token interface
 }
 
 interface AuthContextType {
 	isLoggedIn: boolean;
 	userRole: UserRole | null;
+	userEmail: string | null; // Add userEmail to the context type
 	login: (token: string) => void;
 	logout: () => void;
 }
@@ -29,6 +31,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [userRole, setUserRole] = useState<UserRole | null>(null);
+	const [userEmail, setUserEmail] = useState<string | null>(null); // Add state for user email
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -41,6 +44,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 				} else {
 					setIsLoggedIn(true);
 					setUserRole(decodedToken.role);
+					setUserEmail(decodedToken.email); // Set the user email
 				}
 			} catch (error) {
 				console.error("Failed to decode token:", error);
@@ -55,6 +59,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			localStorage.setItem("token", token);
 			setIsLoggedIn(true);
 			setUserRole(decodedToken.role);
+			setUserEmail(decodedToken.email); // Set the user email
 		} catch (error) {
 			console.error("Failed to decode token:", error);
 		}
@@ -64,10 +69,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		localStorage.removeItem("token");
 		setIsLoggedIn(false);
 		setUserRole(null);
+		setUserEmail(null); // Reset the user email
 	};
 
 	return (
-		<AuthContext.Provider value={{ isLoggedIn, userRole, login, logout }}>
+		<AuthContext.Provider
+			value={{ isLoggedIn, userRole, userEmail, login, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

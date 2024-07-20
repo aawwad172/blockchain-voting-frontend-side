@@ -1,6 +1,7 @@
 import { calculateYear, calculateStatus } from "@utils/shared/helpers";
 import { Election } from "@hooks/types";
 import { Candidate } from "@hooks/types";
+import axios from "axios";
 
 /**
  * Updates the selected rows based on the checkbox change event.
@@ -88,7 +89,7 @@ export const handleAddElection = (
  * @param {React.Dispatch<React.SetStateAction<Election[]>>} setElections - The state setter for elections.
  * @param {React.Dispatch<React.SetStateAction<Election[]>>} setFilteredElections - The state setter for filtered elections.
  */
-export const addNewElection = (
+export const addNewElection = async (
 	newElection: { title: string; startDate: string; endDate: string },
 	elections: Election[],
 	setElections: React.Dispatch<React.SetStateAction<Election[]>>,
@@ -106,9 +107,25 @@ export const addNewElection = (
 		totalVotes: 0,
 		candidates: [] as Candidate[],
 	};
-	console.log("Adding new election with ID:", newId);
-	setElections([...elections, election]);
-	setFilteredElections([...elections, election]);
+
+	try {
+		const response = await axios.post(
+			"http://localhost:3000/election",
+			newElection,
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		console.log("Election added to blockchain:", response.data);
+
+		// Update state only if the request is successful
+		setElections([...elections, election]);
+		setFilteredElections([...elections, election]);
+	} catch (error) {
+		console.error("Failed to add new election:", error);
+	}
 };
 
 /**

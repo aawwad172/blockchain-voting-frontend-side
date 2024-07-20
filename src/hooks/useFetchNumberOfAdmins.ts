@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchNumberOfAdmins } from "@utils/SuperAdminDashboardUtils/fetchNumberOfAdmins";
+import { fetchNumberOfAdmins } from "@services/userServices";
 
 type useFetchNumberOfAdminsProps = {
 	setNumberOfAdmins: React.Dispatch<React.SetStateAction<number>>;

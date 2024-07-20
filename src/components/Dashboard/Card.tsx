@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import ElectionPaperIcon from "@components/Icons/ElectionPaperIcon";
 import { useAuth } from "@contexts/AuthContext";
 
@@ -10,10 +10,23 @@ interface CardProps {
 	daysForElection: string;
 }
 
-// fixme: Implement the `daysForElection` logic when to write '${} Days Left to end' and when to write '${} Days left to start'
-
 const Card: React.FC<CardProps> = ({ id, title, date, daysForElection }) => {
 	const { isLoggedIn, userRole } = useAuth();
+	const location = useLocation();
+
+	const getLinkPath = () => {
+		const path = location.pathname;
+
+		if (path.startsWith("/userAuth/elections")) {
+			return `/candidates-election/${id}`;
+		} else if (path.startsWith("/dashboard") || path.startsWith("/elections")) {
+			return `/election/${id}`;
+		} else {
+			return userRole === "admin"
+				? `/admin/election/${id}`
+				: `authUser/election/${id}`;
+		}
+	};
 
 	return (
 		<div className="col-xl-6 col-sm-6 mb-xl-4 mb-3">
@@ -39,13 +52,7 @@ const Card: React.FC<CardProps> = ({ id, title, date, daysForElection }) => {
 							<p className="text-sm mb-0 text-capitalize font-weight-bold">
 								{daysForElection}
 							</p>
-							{/* TODO: Fix how the route should look like: with ID or Name or What! */}
-							<Link
-								to={
-									useAuth().userRole === "admin"
-										? `/admin/election/${id}`
-										: `authUser/election/${id}`
-								}>
+							<Link to={getLinkPath()}>
 								<div>
 									More Details
 									<i

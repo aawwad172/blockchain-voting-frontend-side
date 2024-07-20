@@ -25,7 +25,7 @@ const UserElectionsPage: React.FC = () => {
 		setElections,
 		setLoading,
 		setError,
-		useStaticData: true,
+		useStaticData: false,
 	});
 
 	useEffect(() => {

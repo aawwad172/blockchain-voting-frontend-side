@@ -1,10 +1,11 @@
 // components/Navbar.tsx
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@contexts/AuthContext"; // Ensure the correct path
 import logo from "@assets/img/logos/logo.jpg";
 
 const Navbar: React.FC = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace with actual login state
+	const { isLoggedIn, logout } = useAuth(); // Use AuthContext
 
 	return (
 		<>
@@ -12,7 +13,7 @@ const Navbar: React.FC = () => {
 			<nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 				<div className="container-fluid">
 					<Link
-						to={"/Home"}
+						to={"/home"}
 						className="navbar-brand font-weight-bolder"
 						rel="tooltip"
 						title="Blockchain Voting System"
@@ -57,11 +58,11 @@ const Navbar: React.FC = () => {
 							<li className="nav-item text-primary text-gradient">
 								{isLoggedIn ? (
 									<Link
-										to={"/logout"}
+										to={"/"}
 										className="nav-link"
 										onClick={() => {
-											// Implement logout functionality here
-											setIsLoggedIn(false);
+											// Logout functionality
+											logout();
 										}}>
 										Logout
 									</Link>

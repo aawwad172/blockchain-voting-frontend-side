@@ -51,7 +51,7 @@ function App() {
 					element={<ElectionDetails />}
 				/>
 				<Route
-					path="elections"
+					path="/elections"
 					element={<ElectionsPage />}
 				/>
 				<Route
@@ -68,7 +68,7 @@ function App() {
 					element={<AdminProfilePage />}
 				/>
 				<Route
-					path="/authUser/election/:id"
+					path="/candidates-election/:id"
 					element={<CandidatesPage />}
 				/>
 				<Route
