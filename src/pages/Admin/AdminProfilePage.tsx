@@ -32,10 +32,11 @@ const AdminProfilePage: React.FC = () => {
 	};
 
 	const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files === null) return;
 		if (e.target.files && e.target.files[0]) {
 			setUser((prevState) => ({
 				...prevState,
-				profilePic: URL.createObjectURL(e.target.files[0]),
+				profilePic: URL.createObjectURL(e.target.files![0]),
 			}));
 		}
 	};
