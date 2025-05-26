@@ -15,6 +15,8 @@ const SignUpPage: React.FC = () => {
 	const [termsChecked, setTermsChecked] = useState(false);
 
 	const handleSendRequest = (e: React.FormEvent) => {
+		console.info(`Logo URL: ${logo}`);
+		console.info(`Background Image URL: ${backgroundImage}`);
 		e.preventDefault();
 		setName("");
 		setCompanyName("");

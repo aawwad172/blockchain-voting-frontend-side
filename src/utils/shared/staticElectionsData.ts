@@ -1,6 +1,5 @@
 import { calculateYear, calculateStatus } from "@utils/shared/helpers";
 import { Election } from "@hooks/types";
-import { Candidate } from "@hooks/types";
 
 export const loadStaticElectionsData = () => {
 	const staticData: Election[] = [
@@ -14,9 +13,9 @@ export const loadStaticElectionsData = () => {
 			numberOfCandidates: 3,
 			totalVotes: 1000,
 			candidates: [
-				{ id: "1", name: "John Doe", votes: 500, major: "Computer Science" },
-				{ id: "2", name: "Jane Doe", votes: 300, major: "Computer Science" },
-				{ id: "3", name: "John Smith", votes: 200, major: "Computer Science" },
+				{ id: "1", name: "John Doe", votes: 500 },
+				{ id: "2", name: "Jane Doe", votes: 300 },
+				{ id: "3", name: "John Smith", votes: 200 },
 			],
 		},
 
@@ -30,9 +29,9 @@ export const loadStaticElectionsData = () => {
 			numberOfCandidates: 3,
 			totalVotes: 1000,
 			candidates: [
-				{ id: "1", name: "John Doe", votes: 500, major: "Computer Science" },
-				{ id: "2", name: "Jane Doe", votes: 300, major: "Computer Science" },
-				{ id: "3", name: "John Smith", votes: 200, major: "Computer Science" },
+				{ id: "1", name: "John Doe", votes: 500 },
+				{ id: "2", name: "Jane Doe", votes: 300 },
+				{ id: "3", name: "John Smith", votes: 200 },
 			],
 		},
 		{
@@ -49,20 +48,17 @@ export const loadStaticElectionsData = () => {
 					id: "4",
 					name: "Alice Johnson",
 					votes: 800,
-					major: "Computer Science",
 				},
-				{ id: "5", name: "Bob Brown", votes: 700, major: "Computer Science" },
+				{ id: "5", name: "Bob Brown", votes: 700 },
 				{
 					id: "6",
 					name: "Charlie Davis",
 					votes: 300,
-					major: "Computer Science",
 				},
 				{
 					id: "7",
 					name: "Diana Wilson",
 					votes: 200,
-					major: "Computer Science",
 				},
 			],
 		},
